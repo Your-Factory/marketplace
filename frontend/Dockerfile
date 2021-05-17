@@ -1,5 +1,6 @@
-FROM continuumio/miniconda3
+FROM python:3.9.5-alpine3.13
 COPY ./ /app/
 WORKDIR /app
-RUN pip install -r requirements.txt
+RUN python -m venv /venv && source /venv/bin/activate && pip install -r requirements.txt
+ENV PATH /venv/bin:$PATH
 CMD ["flask", "run", "-h", "0.0.0.0"]
