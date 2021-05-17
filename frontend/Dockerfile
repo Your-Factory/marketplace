@@ -3,4 +3,4 @@ COPY ./ /app/
 WORKDIR /app
 RUN python -m venv /venv && source /venv/bin/activate && pip install -r requirements.txt
 ENV PATH /venv/bin:$PATH
-CMD ["gunicorn", "-w", "6", "-b", "0.0.0.0", "app:app"]
+CMD ["gunicorn", "-w", "6", "-b", "0.0.0.0:80", "app:app"]
