@@ -249,3 +249,45 @@ BEGIN
         end loop;
 END
 $$;
+
+create or replace function get_model_previews()
+    returns TABLE
+            (
+                id      integer,
+                name    text,
+                preview bytea,
+                author  text
+            )
+    language plpgsql
+as
+$$
+BEGIN
+    return query select models.id, name, preview, users.login
+                 from models
+                          join users on author_id = users.id;
+END
+$$;
+
+create or replace function get_model(m_id integer, OUT m_name text, OUT m_description text, OUT m_model_file bytea,
+                                     OUT m_model_type text, OUT m_images bytea[], OUT m_image_types text[],
+                                     OUT m_image_descriptions text[]) returns record
+    language plpgsql
+as
+$$
+BEGIN
+    select models.name, models.description, models.model_file, model_formats.name
+    into m_name, m_description, m_model_file, m_model_type
+    from models
+             join model_formats on model_formats.id = models.model_format_id
+    where models.id = m_id;
+
+    select array_agg(image_file::bytea), array_agg(image_formats.name::text), array_agg(description::text)
+    into m_images, m_image_types, m_image_descriptions
+    from model_images
+             join image_formats on model_images.image_format_id = image_formats.id
+    where model_images.id_model = m_id;
+
+END
+$$;
+
+
