@@ -29,10 +29,10 @@
             <div class="collapse navbar-collapse" id="navbarCollapse">
                 <ul class="navbar-nav me-auto mb-2 mb-md-0">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="">Домой</a>
+                        <a class="nav-link active" aria-current="page" href="/">Домой</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Профиль</a>
+                        <a class="nav-link" href="/login">Вход в систему</a>
                     </li>
                 </ul>
                 <form class="d-flex">
@@ -51,23 +51,21 @@
     <div class="left-column">
        <!-- <img data-image="black" src="{{ url_for('static', filename='img/black.png') }}" alt="">
         <img data-image="blue" src="{{ url_for('static', filename='img/blue.png') }}" alt="">-->
-        <img data-image="red" class="active" src="{{ url_for('static', filename='img/red.png') }}" alt="">
+{#        <img data-image="red" class="active" src="{{ url_for('static', filename='img/red.png') }}" alt="">#}
+            <img class="active p-5" src="{{ url_for('static', filename='img/harley.jpg') }}" alt="">
     </div>
-
 
     <!-- Right Column -->
     <div class="right-column">
 
         <!-- Product Description -->
         <div class="product-description">
-            <span>Headphones</span>
-            <h1>Beats EP</h1>
-            <p>The preferred choice of a vast range of acclaimed DJs. Punchy, bass-focused sound and high isolation.
-                Sturdy headband and on-ear cushions suitable for live performance</p>
-        </div>
+{#            <span>Headphones</span>#}
+            <h1>Харли Куинн - 3D-модель для 3D-печати</h1>
+            <p>Харли Куинн !!! Безумно красивая Харли Куинн из Suicide Squad в новой версии. STL-файл для 3D-печати в качестве HI-POLY. Эта дама - один из самых важных персонажей игры Batman: Arkham Asylum.        </div>
 
         <!-- Product Configuration -->
-        <div class="product-configuration">
+{#        <div class="product-configuration">#}
 
             <!-- Product Color -->
             <!--<div class="product-color">
@@ -91,23 +89,25 @@
             </div>-->
 
             <!-- Cable Configuration -->
-            <div class="cable-config">
-                <span>Cable configuration</span>
-
-                <div class="cable-choose">
-                    <button>Straight</button>
-                    <button>Coiled</button>
-                    <button>Long-coiled</button>
-                </div>
-
-                <a href="#">How to configurate your headphones</a>
-            </div>
+{#            <div class="cable-config">#}
+{#                <span>Cable configuration</span>#}
+{##}
+{#                <div class="cable-choose">#}
+{#                    <button>Straight</button>#}
+{#                    <button>Coiled</button>#}
+{#                    <button>Long-coiled</button>#}
+{#                </div>#}
+{##}
+{#                <a href="#">How to configurate your headphones</a>#}
+{#            </div>#}
+{#        </div>#}
+        <div class="product-price p-1">
+            <span id = "Price">148$ × </span><input type="text" id="AmountOfModelsToBuy" maxlength="10" style="width: 75px;"/>
         </div>
-
         <!-- Product Pricing -->
-        <div class="product-price">
-            <span>148$</span>
-            <a href="#" class="cart-btn">Add to cart</a>
+        <div class="product-price p-1">
+            <span id="FinalPrice">148$</span>
+            <a href="/checkout" class="cart-btn btn-secondary">Добавить в корзину</a>
         </div>
     </div>
 </main>
