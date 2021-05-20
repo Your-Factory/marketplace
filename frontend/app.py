@@ -21,3 +21,8 @@ def checkout_page():
 @app.route('/model')
 def model_page():
     return render_template('model_page.html')
+
+
+@app.route('/about')
+def about_page():
+    return render_template('about.html')

@@ -26,20 +26,36 @@
                     aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <div class="collapse navbar-collapse" id="navbarCollapse">
-                <ul class="navbar-nav me-auto mb-2 mb-md-0">
+
+            <div class="collapse navbar-collapse" id="navbarCollapseBegin">
+                <ul class="navbar-nav ">
                     <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="/">Домой</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/login">Вход в систему</a>
+                        <a class="nav-link active" href="/about">О нас</a>
                     </li>
                 </ul>
-                <form class="d-flex">
+                <!--<form class="d-flex">
                     <input class="form-control me-2" type="search" placeholder="Search"
                            aria-label="Найдте нужную модель">
                     <button class="btn btn-outline-success" type="submit">Поиск</button>
-                </form>
+                </form>-->
+            </div>
+            <div class="collapse navbar-collapse justify-content-end" id="navbarCollapseEnd">
+                <ul class="navbar-nav ">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="/login">Вход</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#">Корзина</a>
+                    </li>
+                </ul>
+                <!--<form class="d-flex">
+                    <input class="form-control me-2" type="search" placeholder="Search"
+                           aria-label="Найдте нужную модель">
+                    <button class="btn btn-outline-success" type="submit">Поиск</button>
+                </form>-->
             </div>
         </div>
     </nav>
@@ -51,8 +67,7 @@
     <div class="left-column">
        <!-- <img data-image="black" src="{{ url_for('static', filename='img/black.png') }}" alt="">
         <img data-image="blue" src="{{ url_for('static', filename='img/blue.png') }}" alt="">-->
-{#        <img data-image="red" class="active" src="{{ url_for('static', filename='img/red.png') }}" alt="">#}
-            <img class="active p-5" src="{{ url_for('static', filename='img/harley.jpg') }}" alt="">
+            <img class="active p-5" src="https://img11.postila.ru/data/63/83/da/b4/6383dab41339133bbd2f58fbbac5a6a5f9fa7c4d047b1cd2bf5528ce88d63e20.jpg" alt="">
     </div>
 
     <!-- Right Column -->
