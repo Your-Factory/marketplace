@@ -25,37 +25,52 @@
                     aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-
             <div class="collapse navbar-collapse" id="navbarCollapseBegin">
                 <ul class="navbar-nav ">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="/">Домой</a>
+                        <a class="nav-link" aria-current="page" href="/">Маркетплейс</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" href="/about">О нас</a>
+                        <a class="nav-link" href="#">Корзина</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/login">Вход</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/about">О нас</a>
                     </li>
                 </ul>
-                <!--<form class="d-flex">
-                    <input class="form-control me-2" type="search" placeholder="Search"
-                           aria-label="Найдте нужную модель">
-                    <button class="btn btn-outline-success" type="submit">Поиск</button>
-                </form>-->
             </div>
-            <div class="collapse navbar-collapse justify-content-end" id="navbarCollapseEnd">
-                <ul class="navbar-nav ">
-                    <li class="nav-item">
-                        <a class="nav-link active" href="/login">Вход</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link active" href="#">Корзина</a>
-                    </li>
-                </ul>
-                <!--<form class="d-flex">
-                    <input class="form-control me-2" type="search" placeholder="Search"
-                           aria-label="Найдте нужную модель">
-                    <button class="btn btn-outline-success" type="submit">Поиск</button>
-                </form>-->
-            </div>
+{#            <div class="collapse navbar-collapse" id="navbarCollapseBegin">#}
+{#                <ul class="navbar-nav ">#}
+{#                    <li class="nav-item">#}
+{#                        <a class="nav-link active" aria-current="page" href="/">Домой</a>#}
+{#                    </li>#}
+{#                    <li class="nav-item">#}
+{#                        <a class="nav-link active" href="/about">О нас</a>#}
+{#                    </li>#}
+{#                </ul>#}
+{#                <!--<form class="d-flex">#}
+{#                    <input class="form-control me-2" type="search" placeholder="Search"#}
+{#                           aria-label="Найдте нужную модель">#}
+{#                    <button class="btn btn-outline-success" type="submit">Поиск</button>#}
+{#                </form>-->#}
+{#            </div>#}
+{#            <div class="collapse navbar-collapse justify-content-end" id="navbarCollapseEnd">#}
+{#                <ul class="navbar-nav ">#}
+{#                    <li class="nav-item">#}
+{#                        <a class="nav-link active" href="/login">Вход</a>#}
+{#                    </li>#}
+{#                    <li class="nav-item">#}
+{#                        <a class="nav-link active" href="#">Корзина</a>#}
+{#                    </li>#}
+{#                </ul>#}
+{#                <!--<form class="d-flex">#}
+{#                    <input class="form-control me-2" type="search" placeholder="Search"#}
+{#                           aria-label="Найдте нужную модель">#}
+{#                    <button class="btn btn-outline-success" type="submit">Поиск</button>#}
+{#                </form>-->#}
+{#            </div>#}
         </div>
     </nav>
 </header>
@@ -86,41 +101,41 @@
                     </li>
                     {#
                     <li class="list-group-item d-flex justify-content-between lh-sm">#}
-                        {#
+                    {#
                         <div>#}
-                            {# <h6 class="my-0">Second product</h6>#}
-                            {# <small class="text-muted">Brief description</small>#}
-                            {#
+                    {# <h6 class="my-0">Second product</h6>#}
+                    {# <small class="text-muted">Brief description</small>#}
+                    {#
                         </div>
                         #}
-                        {# <span class="text-muted">$8</span>#}
-                        {#
+                    {# <span class="text-muted">$8</span>#}
+                    {#
                     </li>
                     #}
                     {#
                     <li class="list-group-item d-flex justify-content-between lh-sm">#}
-                        {#
+                    {#
                         <div>#}
-                            {# <h6 class="my-0">Third item</h6>#}
-                            {# <small class="text-muted">Brief description</small>#}
-                            {#
+                    {# <h6 class="my-0">Third item</h6>#}
+                    {# <small class="text-muted">Brief description</small>#}
+                    {#
                         </div>
                         #}
-                        {# <span class="text-muted">$5</span>#}
-                        {#
+                    {# <span class="text-muted">$5</span>#}
+                    {#
                     </li>
                     #}
                     {#
                     <li class="list-group-item d-flex justify-content-between bg-light">#}
-                        {#
+                    {#
                         <div class="text-success">#}
-                            {# <h6 class="my-0">Promo code</h6>#}
-                            {# <small>EXAMPLECODE</small>#}
-                            {#
+                    {# <h6 class="my-0">Promo code</h6>#}
+                    {# <small>EXAMPLECODE</small>#}
+                    {#
                         </div>
                         #}
-                        {# <span class="text-success">−$5</span>#}
-                        {#
+                    {# <span class="text-success">−$5</span>#}
+                    {#
                     </li>
                     #}
                     <li class="list-group-item d-flex justify-content-between">
@@ -131,16 +146,16 @@
 
                 {#
                 <form class="card p-2">#}
-                    {#
+                {#
                     <div class="input-group">#}
-                        {# <input type="text" class="form-control" placeholder="Promo code">#}
-                        {#
+                {# <input type="text" class="form-control" placeholder="Promo code">#}
+                {#
                         <button type="submit" class="btn btn-secondary">Redeem</button>
                         #}
-                        {#
+                {#
                     </div>
                     #}
-                    {#
+                {#
                 </form>
                 #}
             </div>
@@ -275,7 +290,8 @@
 
                         <div class="col-md-6">
                             <label for="cc-number" class="form-label">Номер карты</label>
-                            <input type="number" minlength="13"  minlength="18" class="form-control" id="cc-number" placeholder="" required>
+                            <input type="number" minlength="13" minlength="18" class="form-control" id="cc-number"
+                                   placeholder="" required>
                             <div class="invalid-feedback">
                                 Необходимо указать номер карты
                             </div>
@@ -292,7 +308,8 @@
 
                         <div class="col-md-6">
                             <label for="cc-cvv" class="form-label">CVV</label>
-                            <input type="number" minlength="3"  minlength="3" class="form-control" id="cc-cvv" placeholder="" required>
+                            <input type="number" minlength="3" minlength="3" class="form-control" id="cc-cvv"
+                                   placeholder="" required>
                             <div class="invalid-feedback">
                                 Необходимо ввести код безопасности
                             </div>
@@ -311,16 +328,16 @@
         <p class="mb-1">&copy; Your-factory</p>
         {#
         <ul class="list-inline">#}
-            {#
+        {#
             <li class="list-inline-item"><a href="#">Privacy</a></li>
             #}
-            {#
+        {#
             <li class="list-inline-item"><a href="#">Terms</a></li>
             #}
-            {#
+        {#
             <li class="list-inline-item"><a href="#">Support</a></li>
             #}
-            {#
+        {#
         </ul>
         #}
     </footer>
