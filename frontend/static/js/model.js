@@ -15,6 +15,5 @@ amount.addEventListener('change', multiplyAmountAndPrice);
 function multiplyAmountAndPrice() {
     var price = document.getElementById('Price').value;
     var amount = document.getElementById('AmountOfModelsToBuy').value;
-    alert(amount);
     document.getElementById('FinalPrice').value = price * amount;
 }

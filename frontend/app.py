@@ -12,12 +12,15 @@ def main_page():
 def login_page():
     return render_template('login.html')
 
-
 @app.route('/checkout')
 def checkout_page():
     return render_template('checkout.html')
 
-
 @app.route('/model')
 def model_page():
     return render_template('model_page.html')
+
+
+@app.route('/about')
+def about_page():
+    return render_template('about.html')

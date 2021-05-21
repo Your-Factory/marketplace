@@ -11,29 +11,14 @@
     <link rel="canonical" href="https://getbootstrap.com/docs/5.0/examples/album/">
 
 
-    <!-- Bootstrap core CSS -->
+{#    Bootstrap core CSS #}
     <link href="{{ url_for('static', filename='css/bootstrap.min.css') }}" rel="stylesheet">
 
-    <style>
-        .bd-placeholder-img {
-            font-size: 1.125rem;
-            text-anchor: middle;
-            -webkit-user-select: none;
-            -moz-user-select: none;
-            user-select: none;
-        }
-
-        @media (min-width: 768px) {
-            .bd-placeholder-img-lg {
-                font-size: 3.5rem;
-            }
-        }
-    </style>
-
+{#    Custom styles for this template#}
+    <link href="{{ url_for('static', filename='css/store_front.css') }}" rel="stylesheet">
 
 </head>
 <body>
-
 <header>
     <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
         <div class="container-fluid">
@@ -42,21 +27,38 @@
                     aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <div class="collapse navbar-collapse" id="navbarCollapse">
-                <ul class="navbar-nav me-auto mb-2 mb-md-0">
+
+            <div class="collapse navbar-collapse" id="navbarCollapseBegin">
+                <ul class="navbar-nav ">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="">Домой</a>
+                        <a class="nav-link active" aria-current="page" href="/">Маркетплейс</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/login">Вход в систему</a>
+                        <a class="nav-link" href="#">Корзина</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/login">Вход</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/about">О нас</a>
                     </li>
                 </ul>
-                <form class="d-flex">
-                    <input class="form-control me-2" type="search" placeholder="Search"
-                           aria-label="Найдте нужную модель">
-                    <button class="btn btn-outline-success" type="submit">Поиск</button>
-                </form>
             </div>
+            <!--<form class="d-flex">
+                <input class="form-control me-2" type="search" placeholder="Search"
+                       aria-label="Найдте нужную модель">
+                <button class="btn btn-outline-success" type="submit">Поиск</button>
+            </form>-->
+            {#            <div class="collapse navbar-collapse justify-content-end" id="navbarCollapseEnd">#}
+            {#                <ul class="navbar-nav ">#}
+            {#                    #}
+            {#                </ul>#}
+            {#                <!--<form class="d-flex">#}
+            {#                    <input class="form-control me-2" type="search" placeholder="Search"#}
+            {#                           aria-label="Найдте нужную модель">#}
+            {#                    <button class="btn btn-outline-success" type="submit">Поиск</button>#}
+            {#                </form>-->#}
+            {#            </div>#}
         </div>
     </nav>
 </header>
@@ -75,20 +77,28 @@
             </div>
         </div>
     </section>
-
     <div class="album py-5 bg-light">
         <div class="container">
             <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
                 <div class="col">
                     <div class="card shadow-sm">
-{#                        <svg class="bd-placeholder-img card-img-top" width="100%" height="225"#}
-{#                             xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail"#}
-{#                             preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title>#}
-{#                          <!--  <img data-image="red" class="active" src="{{ url_for('static', filename='img/red.png') }}"--> alt="">#}
-{#                            <rect width="100%" height="100%" fill="#55595c"/>#}
-{#                            <text x="50%" y="50%" fill="#eceeef" dy=".3em">Модель</text>#}
-{#                        </svg>#}
-                        <img src = "https://assets.pinshape.com/uploads/image/file/157010/harley-quinn-3d-model-for-3d-printing-3d-printing-157010.jpg">
+                        {#
+                        <svg class="bd-placeholder-img card-img-top" width="100%" height="225" #}
+                        {# xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" #}
+                        {# preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title>#}
+                        {#
+                            <!--  <img data-image="red" class="active" src="{{ url_for('static', filename='img/red.png') }}"-->
+                            alt="">#}
+                        {#
+                            <rect width="100%" height="100%" fill="#55595c"/>
+                            #}
+                        {#
+                            <text x="50%" y="50%" fill="#eceeef" dy=".3em">Модель</text>
+                            #}
+                        {#
+                        </svg>
+                        #}
+                        <img src="https://assets.pinshape.com/uploads/image/file/157010/harley-quinn-3d-model-for-3d-printing-3d-printing-157010.jpg">
                         <div class="card-body">
                             <p class="card-text">Harley Quinn - 3D Model for 3D Printing</p>
                             <div class="d-flex justify-content-between align-items-center">
@@ -97,10 +107,10 @@
                                         <button type="submit" class="btn btn-sm btn-outline-secondary">Посмотреть
                                         </button>
                                     </form>
-                                    <!--Если это модель юзера-->
-                                    <!--<button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>-->
+{#                                    Если это модель юзера#}
+{#                                    <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>#}
                                 </div>
-                                <!--<small class="text-muted">Price</small>-->
+{#                                <small class="text-muted">Price</small>#}
                             </div>
                         </div>
                     </div>
