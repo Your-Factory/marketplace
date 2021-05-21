@@ -222,7 +222,7 @@
 
                         <div class="col-md-3">
                             <label for="zip" class="form-label">Индекс</label>
-                            <input type="text" class="form-control" id="zip" placeholder="" required>
+                            <input type="number" class="form-control" id="zip" placeholder="" required>
                             <div class="invalid-feedback">
                                 Требуется почтовый индекс.
                             </div>
@@ -275,7 +275,7 @@
 
                         <div class="col-md-6">
                             <label for="cc-number" class="form-label">Номер карты</label>
-                            <input type="text" class="form-control" id="cc-number" placeholder="" required>
+                            <input type="number" minlength="13"  minlength="18" class="form-control" id="cc-number" placeholder="" required>
                             <div class="invalid-feedback">
                                 Необходимо указать номер карты
                             </div>
@@ -283,7 +283,7 @@
 
                         <div class="col-md-3">
                             <label for="cc-expiration" class="form-label">Срок действия</label>
-                            <input type="text" class="form-control" id="cc-expiration" placeholder="" required>
+                            <input type="month" class="form-control" id="cc-expiration" placeholder="" required>
                             <div class="invalid-feedback">
                                 Необходимо указать срок действия
                             </div>
@@ -291,7 +291,7 @@
 
                         <div class="col-md-3">
                             <label for="cc-cvv" class="form-label">CVV</label>
-                            <input type="text" class="form-control" id="cc-cvv" placeholder="" required>
+                            <input type="number" class="form-control" id="cc-cvv" placeholder="" required>
                             <div class="invalid-feedback">
                                 Необходимо ввести код безопасности
                             </div>
