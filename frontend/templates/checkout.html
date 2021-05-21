@@ -10,10 +10,10 @@
 
     <link rel="canonical" href="https://getbootstrap.com/docs/5.0/examples/checkout/">
 
-    <!-- Bootstrap core CSS -->
+{#    Bootstrap core CSS#}
     <link href="{{ url_for('static', filename='css/bootstrap.min.css') }}" rel="stylesheet">
 
-    <!-- Custom styles for this template -->
+{#    Custom styles for this template#}
     <link href="{{ url_for('static', filename='css/checkout.css') }}" rel="stylesheet">
 </head>
 <body class="bg-light">
@@ -41,36 +41,36 @@
                     </li>
                 </ul>
             </div>
-{#            <div class="collapse navbar-collapse" id="navbarCollapseBegin">#}
-{#                <ul class="navbar-nav ">#}
-{#                    <li class="nav-item">#}
-{#                        <a class="nav-link active" aria-current="page" href="/">Домой</a>#}
-{#                    </li>#}
-{#                    <li class="nav-item">#}
-{#                        <a class="nav-link active" href="/about">О нас</a>#}
-{#                    </li>#}
-{#                </ul>#}
-{#                <!--<form class="d-flex">#}
-{#                    <input class="form-control me-2" type="search" placeholder="Search"#}
-{#                           aria-label="Найдте нужную модель">#}
-{#                    <button class="btn btn-outline-success" type="submit">Поиск</button>#}
-{#                </form>-->#}
-{#            </div>#}
-{#            <div class="collapse navbar-collapse justify-content-end" id="navbarCollapseEnd">#}
-{#                <ul class="navbar-nav ">#}
-{#                    <li class="nav-item">#}
-{#                        <a class="nav-link active" href="/login">Вход</a>#}
-{#                    </li>#}
-{#                    <li class="nav-item">#}
-{#                        <a class="nav-link active" href="#">Корзина</a>#}
-{#                    </li>#}
-{#                </ul>#}
-{#                <!--<form class="d-flex">#}
-{#                    <input class="form-control me-2" type="search" placeholder="Search"#}
-{#                           aria-label="Найдте нужную модель">#}
-{#                    <button class="btn btn-outline-success" type="submit">Поиск</button>#}
-{#                </form>-->#}
-{#            </div>#}
+            {#            <div class="collapse navbar-collapse" id="navbarCollapseBegin">#}
+            {#                <ul class="navbar-nav ">#}
+            {#                    <li class="nav-item">#}
+            {#                        <a class="nav-link active" aria-current="page" href="/">Домой</a>#}
+            {#                    </li>#}
+            {#                    <li class="nav-item">#}
+            {#                        <a class="nav-link active" href="/about">О нас</a>#}
+            {#                    </li>#}
+            {#                </ul>#}
+            {#                <!--<form class="d-flex">#}
+            {#                    <input class="form-control me-2" type="search" placeholder="Search"#}
+            {#                           aria-label="Найдте нужную модель">#}
+            {#                    <button class="btn btn-outline-success" type="submit">Поиск</button>#}
+            {#                </form>-->#}
+            {#            </div>#}
+            {#            <div class="collapse navbar-collapse justify-content-end" id="navbarCollapseEnd">#}
+            {#                <ul class="navbar-nav ">#}
+            {#                    <li class="nav-item">#}
+            {#                        <a class="nav-link active" href="/login">Вход</a>#}
+            {#                    </li>#}
+            {#                    <li class="nav-item">#}
+            {#                        <a class="nav-link active" href="#">Корзина</a>#}
+            {#                    </li>#}
+            {#                </ul>#}
+            {#                <!--<form class="d-flex">#}
+            {#                    <input class="form-control me-2" type="search" placeholder="Search"#}
+            {#                           aria-label="Найдте нужную модель">#}
+            {#                    <button class="btn btn-outline-success" type="submit">Поиск</button>#}
+            {#                </form>-->#}
+            {#            </div>#}
         </div>
     </nav>
 </header>
@@ -290,7 +290,7 @@
 
                         <div class="col-md-6">
                             <label for="cc-number" class="form-label">Номер карты</label>
-                            <input type="number" minlength="13" minlength="18" class="form-control" id="cc-number"
+                            <input type="number" minlength="13" manlength="18" class="form-control" id="cc-number"
                                    placeholder="" required>
                             <div class="invalid-feedback">
                                 Необходимо указать номер карты
@@ -308,7 +308,7 @@
 
                         <div class="col-md-6">
                             <label for="cc-cvv" class="form-label">CVV</label>
-                            <input type="number" minlength="3" minlength="3" class="form-control" id="cc-cvv"
+                            <input type="number" minlength="3" manlength="3" class="form-control" id="cc-cvv"
                                    placeholder="" required>
                             <div class="invalid-feedback">
                                 Необходимо ввести код безопасности
@@ -326,20 +326,20 @@
 
     <footer class="my-5 pt-5 text-muted text-center text-small">
         <p class="mb-1">&copy; Your-factory</p>
-        {#
-        <ul class="list-inline">#}
-        {#
-            <li class="list-inline-item"><a href="#">Privacy</a></li>
-            #}
-        {#
-            <li class="list-inline-item"><a href="#">Terms</a></li>
-            #}
-        {#
-            <li class="list-inline-item"><a href="#">Support</a></li>
-            #}
-        {#
-        </ul>
-        #}
+
+        {#        <ul class="list-inline">#}
+        {##}
+        {#            <li class="list-inline-item"><a href="#">Privacy</a></li>#}
+        {##}
+        {##}
+        {#            <li class="list-inline-item"><a href="#">Terms</a></li>#}
+        {##}
+        {##}
+        {#            <li class="list-inline-item"><a href="#">Support</a></li>#}
+        {##}
+        {##}
+        {#        </ul>#}
+
     </footer>
 </div>
 
