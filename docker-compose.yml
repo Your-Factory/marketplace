@@ -8,6 +8,10 @@ services:
       context: ./frontend
     environment:
       PORT: "${WEB_PORT}"
+      # When the app is deployed to Heroku, we need to
+      # use https://yourfactory-api.herokuapp.com
+      # instead of http://backend-app/
+      BACK_URL: "${BACK_URL}"
     ports:
       - "${WEB_PORT}:${WEB_PORT}"
     networks:
