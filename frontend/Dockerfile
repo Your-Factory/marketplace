@@ -3,5 +3,5 @@ WORKDIR /app
 COPY requirements.txt /app/requirements.txt
 RUN python -m venv /venv && source /venv/bin/activate && pip install -r requirements.txt
 ENV PATH /venv/bin:$PATH
-CMD ["gunicorn", "-w", "6", "-b", "0.0.0.0:80", "app:app"]
+CMD gunicorn -w 6 -b 0.0.0.0:${PORT} app:app
 COPY ./ /app/
