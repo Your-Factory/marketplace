@@ -12,9 +12,11 @@ def main_page():
 def login_page():
     return render_template('login.html')
 
+
 @app.route('/checkout')
 def checkout_page():
     return render_template('checkout.html')
+
 
 @app.route('/model')
 def model_page():
@@ -24,3 +26,8 @@ def model_page():
 @app.route('/about')
 def about_page():
     return render_template('about.html')
+
+
+@app.route('/model3d')
+def model3d_page():
+    return render_template('model3d_page.html')
