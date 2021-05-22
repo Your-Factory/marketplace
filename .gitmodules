@@ -1,0 +1,3 @@
+[submodule "marketplace-api"]
+	path = marketplace-api
+	url = git@github.com:Your-Factory/marketplace-api.git
