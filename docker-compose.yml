@@ -1,6 +1,6 @@
 version: "3"
 networks:
-  service-net:
+  internal:
 
 services:
   frontend-app:
@@ -11,7 +11,7 @@ services:
     ports:
       - "${WEB_PORT}:${WEB_PORT}"
     networks:
-      - service-net
+      - internal
 
   backend-app:
     build:
@@ -24,7 +24,7 @@ services:
 
     # Use http://backend-app/ as the base hostname
     networks:
-      - service-net
+      - internal
 
   database:
     image: postgres:13.2-alpine
@@ -38,4 +38,4 @@ services:
 #    ports:
 #      - "${DB_PORT}:${DB_PORT}"
     networks:
-      - service-net
+      - internal
