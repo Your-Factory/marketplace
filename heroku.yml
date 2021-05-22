@@ -1,0 +1,10 @@
+setup:
+  addons:
+    - plan: heroku-postgresql
+      as: DATABASE
+build:
+  docker:
+    marketplace-front: frontend/Dockerfile
+    # marketplace-back: backend/Dockerfile
+  # config:
+  #   FOO: bar
