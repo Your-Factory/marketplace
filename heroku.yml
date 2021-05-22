@@ -4,7 +4,7 @@ setup:
       as: DATABASE
 build:
   docker:
-    marketplace-front: frontend/Dockerfile
-    # marketplace-back: backend/Dockerfile
+    yourfactory-marketplace: frontend/Dockerfile
+    yourfactory-api: backend/Dockerfile
   # config:
   #   FOO: bar
