@@ -9,7 +9,7 @@ def get_models():
     GET: available model ids
     :return: list of models present in the database
     """
-    pass
+    return "Bleep blop nothing here atm :("
 
 
 @app.route('/model/<mid>')
