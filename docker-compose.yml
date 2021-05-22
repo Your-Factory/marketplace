@@ -18,9 +18,9 @@ services:
       context: ./backend
     environment:
       PORT: "${BACK_PORT}"
-# Uncomment to allow direct access from host system (e.g. for testing using Postman)
-#    ports:
-#      - "${BACK_PORT}:${BACK_PORT}"
+    # Uncomment to allow direct access from host system (e.g. for testing using Postman)
+    #    ports:
+    #      - "${BACK_PORT}:${BACK_PORT}"
 
     # Use http://backend-app/ as the base hostname
     networks:
@@ -33,9 +33,9 @@ services:
     volumes:
       - ./db:/docker-entrypoint-initdb.d/
 
-# Uncomment to map ports allowing direct access to Database.
-# Convenient when debugging.
-#    ports:
-#      - "${DB_PORT}:${DB_PORT}"
+    # Uncomment to map ports allowing direct access to Database.
+    # Convenient when debugging.
+    #    ports:
+    #      - "${DB_PORT}:${DB_PORT}"
     networks:
       - internal
