@@ -5,7 +5,7 @@ networks:
 services:
   frontend-app:
     build:
-      context: ./frontend
+      context: frontend
     environment:
       PORT: "${WEB_PORT}"
       # When the app is deployed to Heroku, we need to
@@ -19,7 +19,7 @@ services:
 
   backend-app:
     build:
-      context: ./marketplace-api/backend
+      context: backend
     environment:
       PORT: "${BACK_PORT}"
     # Uncomment to allow direct access from host system (e.g. for testing using Postman)
@@ -35,7 +35,7 @@ services:
     # map directories
     # Every .sql or .sh script in the mapped directory is executed on container startup
     volumes:
-      - ./marketplace-api/db:/docker-entrypoint-initdb.d/
+      - ./db:/docker-entrypoint-initdb.d/
 
     # Uncomment to map ports allowing direct access to Database.
     # Convenient when debugging.
