@@ -1,21 +1,16 @@
-from flask import Flask, request
+# TODO: specify db interaction API
 
-app = Flask(__name__)
-
-
-@app.route('/models')
 def get_models():
     """
-    GET: available model ids
+    Return
     :return: list of models present in the database
     """
     return "Bleep blop nothing here atm :("
 
 
-@app.route('/model/<mid>')
 def get_model_data(mid):
     """
-    GET model data:
+    Get model data:
 
     - model description,
     - model price,
@@ -23,15 +18,14 @@ def get_model_data(mid):
     - model blob
 
     :param mid: model id
-    :return: model data in JSON
+    :return: dict with model data
     """
     pass
 
 
-@app.route('/model/create', methods=["POST"])
 def create_model():
     """
-    POST new model.
+    Add a new model.
 
     Request body must contain:
 
@@ -42,14 +36,12 @@ def create_model():
 
     :return: model id
     """
-    data = request.json
-    # pass data to database proxy, return generated id
+    pass
 
 
-@app.route('/model/<mid>/modify', methods=["PUT"])
 def change_model(mid):
     """
-    PUT updated model params:
+    Update model params:
 
     - description,
     - price,
@@ -61,3 +53,4 @@ def change_model(mid):
     :param mid: model id to change
     :return: status code
     """
+    pass

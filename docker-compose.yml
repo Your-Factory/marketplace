@@ -3,30 +3,14 @@ networks:
   internal:
 
 services:
-  frontend-app:
+  web:
     build:
-      context: frontend
+      context: .
+      dockerfile: Dockerfile
     environment:
       PORT: "${WEB_PORT}"
-      # When the app is deployed to Heroku, we need to
-      # use https://yourfactory-api.herokuapp.com
-      # instead of http://backend-app/
-      BACK_URL: "${BACK_URL}"
     ports:
       - "${WEB_PORT}:${WEB_PORT}"
-    networks:
-      - internal
-
-  backend-app:
-    build:
-      context: backend
-    environment:
-      PORT: "${BACK_PORT}"
-    # Uncomment to allow direct access from host system (e.g. for testing using Postman)
-    #    ports:
-    #      - "${BACK_PORT}:${BACK_PORT}"
-
-    # Use http://backend-app/ as the base hostname
     networks:
       - internal
 
@@ -34,6 +18,8 @@ services:
     image: postgres:13.2-alpine
     # map directories
     # Every .sql or .sh script in the mapped directory is executed on container startup
+    environment:
+      POSTGRES_PASSWORD: "${POSTGRES_PASSWORD}"
     volumes:
       - ./db:/docker-entrypoint-initdb.d/
 

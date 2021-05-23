@@ -1,3 +1,6 @@
 **/venv/
 **/__pycache__/
 **/doc/
+**/*.sql
+**/heroku.yml
+**/README*
