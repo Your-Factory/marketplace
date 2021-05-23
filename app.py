@@ -1,19 +1,14 @@
-import logging
 import requests
 
+from db import get_models
 from flask import Flask, render_template
-from os import getenv
-from urllib.parse import urljoin
 
 app = Flask(__name__)
-back_url = getenv('BACK_URL')
 
 
 @app.route('/')
 def main_page():
-    # Service interop example
-    url = urljoin(back_url, '/models')
-    model_ids = requests.get(url)
+    model_ids = get_models()
 
     # Do something with the data
     return render_template('store_front.html', data=model_ids)
