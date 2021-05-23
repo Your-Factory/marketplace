@@ -1,44 +1,45 @@
 version: "3"
 networks:
-  service-net:
+  internal:
 
 services:
   frontend-app:
     build:
       context: ./frontend
+    environment:
+      PORT: "${WEB_PORT}"
+      # When the app is deployed to Heroku, we need to
+      # use https://yourfactory-api.herokuapp.com
+      # instead of http://backend-app/
+      BACK_URL: "${BACK_URL}"
     ports:
-      - "80:80"
+      - "${WEB_PORT}:${WEB_PORT}"
     networks:
-      - service-net
+      - internal
 
   backend-app:
     build:
-      context: ./backend
+      context: ./marketplace-api/backend
     environment:
-      DB_USER: "postgres"
-      DB_PASSWORD: "YOUR PASSWORD"
-      DB_HOST: "database"
-      DB_NAME: "postgres"
-# Uncomment to allow direct access from host system (e.g. for testing using Postman)
-#    ports:
-#      - "8000:8000"
+      PORT: "${BACK_PORT}"
+    # Uncomment to allow direct access from host system (e.g. for testing using Postman)
+    #    ports:
+    #      - "${BACK_PORT}:${BACK_PORT}"
 
     # Use http://backend-app/ as the base hostname
     networks:
-      - service-net
+      - internal
 
   database:
     image: postgres:13.2-alpine
-    environment:
-      POSTGRES_PASSWORD: "YOUR PASSWORD"
     # map directories
     # Every .sql or .sh script in the mapped directory is executed on container startup
     volumes:
-      - ./db:/docker-entrypoint-initdb.d/
+      - ./marketplace-api/db:/docker-entrypoint-initdb.d/
 
-# Uncomment to map ports allowing direct access to Database.
-# Convenient when debugging.
-#    ports:
-#      - "5432:5432"
+    # Uncomment to map ports allowing direct access to Database.
+    # Convenient when debugging.
+    #    ports:
+    #      - "${DB_PORT}:${DB_PORT}"
     networks:
-      - service-net
+      - internal
