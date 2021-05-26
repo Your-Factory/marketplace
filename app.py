@@ -1,14 +1,18 @@
 import requests
+import hashlib
+from db import YourFactoryDB
+from flask import Flask, render_template, redirect, url_for, request
+from utils.env_helper import get_heroku_params
 
-from db import get_models
-from flask import Flask, render_template
 
 app = Flask(__name__)
+db_connection = get_heroku_params()
+database = YourFactoryDB(**db_connection)
 
 
 @app.route('/')
 def main_page():
-    model_ids = get_models()
+    model_ids = "None"
 
     # Do something with the data
     return render_template('store_front.html', data=model_ids)
@@ -32,3 +36,12 @@ def model_page():
 @app.route('/about')
 def about_page():
     return render_template('about.html')
+
+
+@app.route('/registration', methods=['POST'])
+def signup_post():
+    email = request.form.get('email')
+    password = request.form.get('password')
+
+    return redirect(url_for('app.model'))
+

@@ -5,8 +5,9 @@ import datetime
 
 
 class YourFactoryDB:
-    def __init__(self, host, database, user, password, port=5432):
+    def __init__(self, host=None, database_url=None, database=None, user=None, password=None, port=5432):
         self.host = host
+        self.database_url = database_url
         self.db = database
         self.user = user
         self.password = password
@@ -15,8 +16,11 @@ class YourFactoryDB:
 
     def connect(self):
         try:
-            self.conn = psycopg2.connect(host=self.host, database=self.db, user=self.user,
-                                         password=self.password, port=self.port)
+            if self.database_url is None:
+                self.conn = psycopg2.connect(host=self.host, database=self.db, user=self.user,
+                                             password=self.password, port=self.port)
+            else:
+                self.conn = psycopg2.connect(self.database_url, sslmode='require')
             return True
         except psycopg2.DatabaseError as connection_error:
             logging.warning(connection_error)
