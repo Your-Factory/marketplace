@@ -1,3 +1,6 @@
+import requests
+
+from db import get_models
 from flask import Flask, render_template
 
 app = Flask(__name__)
@@ -5,7 +8,10 @@ app = Flask(__name__)
 
 @app.route('/')
 def main_page():
-    return render_template('store_front.html')
+    model_ids = get_models()
+
+    # Do something with the data
+    return render_template('store_front.html', data=model_ids)
 
 
 @app.route('/login')
