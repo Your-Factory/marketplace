@@ -32,3 +32,8 @@ def model_page():
 @app.route('/about')
 def about_page():
     return render_template('about.html')
+
+
+@app.route('/model3d')
+def model3d_page():
+    return render_template('model3d_page.html')

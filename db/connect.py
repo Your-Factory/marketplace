@@ -1,5 +1,3 @@
-# TODO: specify db interaction API
-
 def get_models():
     """
     Return
