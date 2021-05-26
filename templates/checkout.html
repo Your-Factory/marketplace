@@ -19,15 +19,14 @@
 <body class="bg-light">
 <header>
     <nav class="navbar navbar-expand-lg navbar-dark fixed-top bg-dark">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="/">YourFactory</a>
-            <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse"
-                    data-bs-target="#navbarCollapse"
-                    aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-
-            <div class="navbar-collapse collapse" id="navbarCollapseBegin" style="">
+        <div class="container">
+                <a class="navbar-brand" href="/">YourFactory</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#navbarSupportedContent"
+                        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item">
                         <a class="nav-link" href="/">Маркетплейс</a>
@@ -37,14 +36,15 @@
                     </li>
                 </ul>
             </div>
-
-            <div class="collapse navbar-collapse justify-content-end" id="navbarCollapseEnd">
-                <form class="form-inline d-flex mx-lg-auto rounded p-1">
+            <div class="collapse navbar-collapse justify-content-center" id="navbarSupportedContent">
+                 <form class="form-inline d-flex mx-lg-auto rounded p-1">
                     <input class="form-control mr-sm-1" type="search" placeholder="Search"
                            aria-label="Найдите нужную модель">
                     <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Поиск</button>
                 </form>
-                <ul class="navbar-nav ">
+            </div>
+            <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
                     <li class="nav-item">
                         <a class="nav-link" href="#">Корзина</a>
                     </li>
@@ -326,8 +326,10 @@
     </footer>
 </div>
 
-<script src="{{ url_for('static', filename='js/bootstrap.bundle.min.js') }}"></script>
+{#<script src="{{ url_for('static', filename='js/bootstrap.bundle.min.js') }}"></script>#}
 
 <script src="{{ url_for('static', filename='js/checkout.js') }}"></script>
+<script src="../static/js/bootstrap.bundle.min.js"></script>
+
 </body>
 </html>
