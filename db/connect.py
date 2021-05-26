@@ -1,4 +1,41 @@
-# TODO: specify db interaction API
+import psycopg2
+import logging
+import hashlib
+import datetime
+
+
+class YourFactoryDB:
+    def __init__(self, host, database, user, password, port=5432):
+        self.host = host
+        self.db = database
+        self.user = user
+        self.password = password
+        self.port = port
+        self.conn = None
+
+    def connect(self):
+        try:
+            self.conn = psycopg2.connect(host=self.host, database=self.db, user=self.user,
+                                         password=self.password, port=self.port)
+            return True
+        except psycopg2.DatabaseError as connection_error:
+            logging.warning(connection_error)
+            return False
+
+    def create_user(self, login, email, password):
+        salt = datetime.datetime.utcnow()
+        password_hash = hashlib.sha256((password + salt).encode('utf-8')).hexdigest()
+        curr = self.conn.cursor()
+        try:
+            curr.callproc('add_user', (login, email, salt, password_hash))
+            curr.close()
+        except psycopg2.DatabaseError as add_user_error:
+            logging.warning(add_user_error)
+        finally:
+            if curr is not None:
+                curr.close()
+
+
 
 def get_models():
     """
