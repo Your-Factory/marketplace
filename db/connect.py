@@ -23,20 +23,30 @@ class YourFactoryDB:
             return False
 
     def create_user(self, login, email, password):
+        """
+        Add new user to database.
+        :param login - users login:
+        :param email - users email:
+        :param password - users password:
+        :return: True if user was added, else False
+        """
         salt = datetime.datetime.utcnow()
         password_hash = hashlib.sha256((password + salt).encode('utf-8')).hexdigest()
         curr = self.conn.cursor()
+        error = False
         try:
             curr.callproc('add_user', (login, email, salt, password_hash))
             curr.close()
         except psycopg2.DatabaseError as add_user_error:
             logging.warning(add_user_error)
+            error = True
         finally:
             if curr is not None:
                 curr.close()
+        return not error
 
 
-
+'''
 def get_models():
     """
     Return
@@ -91,3 +101,4 @@ def change_model(mid):
     :return: status code
     """
     pass
+'''
