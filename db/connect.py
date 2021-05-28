@@ -50,7 +50,28 @@ class YourFactoryDB:
                 curr.close()
         return not error
 
-
+    def check_user(self, login, email, password):
+        """
+        :param login - users login:
+        :param email - users email:
+        :param password - users password:
+        :return: Id if user exists, else None
+        """
+        curr = self.conn.cursor()
+        try:
+            curr.execute("SELECT * FROM get_user_salt(%s);", (login, ))
+            salt = curr.fetchone()[0]
+            if salt is None:
+                return None
+            password_hash = hashlib.sha256((password + salt).encode('utf-8')).hexdigest()
+            curr.execute("SELECT * FROM check_user_authentication(%s, %s)", (login, password_hash))
+            user_id = bool(curr.fetchone()[0])
+            return user_id
+        except psycopg2.DatabaseError as error:
+            logging.error(error)
+        finally:
+            curr.close()
+        return None
 '''
 def get_models():
     """

@@ -78,10 +78,10 @@
 
         <div class="checkbox mb-3">
             <label>
-                <input type="checkbox" value="remember-me"> Запомнить меня
+                <input type="checkbox" value="remember-me" name="remember"> Запомнить меня
             </label>
         </div>
-        <button class="w-100 btn btn-lg btn-primary" type="submit" id="loginButton">Войти</button>
+        <button class="w-100 btn btn-lg btn-primary" type="submit" id="loginButton" formmethod="post" formaction="/signin">Войти</button>
         <button class="w-100 btn btn-lg btn-primary" type="submit" id="registrationButton"
                 formmethod="post" formaction="/registration">
             Зарегистрироваться
