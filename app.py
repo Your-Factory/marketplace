@@ -43,5 +43,6 @@ def signup_post():
     email = request.form.get('email')
     password = request.form.get('password')
 
-    return redirect(url_for('app.model'))
+    return redirect(url_for('model_page'))
+    # return redirect(url_for('app.model'))
 
