@@ -1,3 +1,5 @@
+import logging
+
 import requests
 import hashlib
 from db import YourFactoryDB
@@ -6,8 +8,9 @@ from utils.env_helper import get_heroku_params
 
 
 app = Flask(__name__)
-db_connection = get_heroku_params()
-database = YourFactoryDB(**db_connection)
+db_connection_params = get_heroku_params()
+database = YourFactoryDB(**db_connection_params)
+database.connect()
 
 
 @app.route('/')
@@ -40,9 +43,9 @@ def about_page():
 
 @app.route('/registration', methods=['POST'])
 def signup_post():
+
     email = request.form.get('email')
     password = request.form.get('password')
-
-    return redirect(url_for('model_page'))
-    # return redirect(url_for('app.model'))
-
+    if database.create_user(email, email, password):
+        return redirect("/")
+    return redirect("/login")

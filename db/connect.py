@@ -34,12 +34,13 @@ class YourFactoryDB:
         :param password - users password:
         :return: True if user was added, else False
         """
-        salt = datetime.datetime.utcnow()
+        salt = str(datetime.datetime.utcnow())
         password_hash = hashlib.sha256((password + salt).encode('utf-8')).hexdigest()
         curr = self.conn.cursor()
         error = False
         try:
-            curr.callproc('add_user', (login, email, salt, password_hash))
+            curr.execute("CALL add_user(%s, %s, %s, %s);", (login, email, salt, password_hash))
+            self.conn.commit()
             curr.close()
         except psycopg2.DatabaseError as add_user_error:
             logging.warning(add_user_error)

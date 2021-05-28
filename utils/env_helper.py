@@ -10,4 +10,4 @@ def get_heroku_params():
         name = os.getenv("DB_NAME")
         port = os.getenv("DB_PORT")
         return {"password": password, "user": user, "host": host, "database": name, "port": port}
-    return {"database_url", url}
+    return {"database_url": url}
