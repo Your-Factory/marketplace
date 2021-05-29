@@ -4,7 +4,7 @@ import os
 from db.connect import YourFactoryDB
 from db.user import User
 from flask import Flask, render_template, redirect, request
-from utils.env_helper import get_heroku_params
+from utils import get_heroku_params
 from flask_login import LoginManager, login_user, login_required
 
 app = Flask(__name__)
