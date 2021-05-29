@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Загрузка модели</title>
+
+    <link href="{{ url_for('static', filename='css/bootstrap.min.css') }}" rel="stylesheet">
+    {#    Custom styles for this template#}
+    <link href="{{ url_for('static', filename='css/download_model.css') }}" rel="stylesheet">
+
+</head>
+<body>
+<header>
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top bg-dark">
+        <div class="container">
+            <a class="navbar-brand" href="/">YourFactory</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarSupportedContent"
+                    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/">Маркетплейс</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/about">О нас</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="collapse navbar-collapse justify-content-center" id="navbarSupportedContent">
+                <form class="form-inline d-flex mx-lg-auto rounded p-1">
+                    <input class="form-control mr-sm-1" type="search" placeholder="Search"
+                           aria-label="Найдите нужную модель">
+                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Поиск</button>
+                </form>
+            </div>
+            <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Корзина</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="/download_model">Загрузить модель</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/login">Вход/Регистрация</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+<main>
+    <div class="container p-4" >
+
+        <p></p>
+        <div class="p-4 text-center">
+            <h2 class="py-5">Загрузка модели</h2>
+        </div>
+
+        <h4>Информация о модели</h4>
+        <form class="requires-validation" novalidate >
+            <div class="col-md-5">
+                <label for="inputName">Имя пользователя</label>
+                <input class="form-control" type="text" placeholder="ИМЯ ПОЛЬЗОВАТЕЛЯ ИЗ ПРОФИЛЯ"
+                       aria-label="inputName" disabled readonly>
+            </div>
+            <p></p>
+            <div class="col-md-5">
+                <label for="inputText">Название модели</label>
+                <input type="text" class="form-control" id="inputText" required>
+
+            </div>
+            <p></p>
+            <div class="col-md-6">
+                <label for="inputText" class="form-label">Описание</label>
+                <textarea class="form-control" id="inputText" rows="3" required></textarea>
+            </div>
+            <p></p>
+
+            <div class="col-md-6">
+                <label for="formFileMultiple" class="form-label">Файлы изображений модели</label>
+                <input class="form-control" type="file" id="formFileImg" accept=".jpg,.png" multiple required>
+                <div class="invalid-feedback">
+                    Проверьте расширение файла
+                </div>
+            </div>
+            <p></p>
+            <div class="col-md-6">
+                <label for="formFile" class="form-label">Файл модели</label>
+                <input class="form-control" type="file" id="formFileModel" accept=".obj" required>
+            </div>
+
+
+            <p></p>
+            <div class="form-group">
+                <div class="form-check">
+                    <label class="form-check-label">
+                        <input class="form-check-input" type="checkbox"> Соглашение на обработку
+                    </label>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary">Загрузить</button>
+        </form>
+
+
+        <footer class="pt-3 mt-4 text-muted border-top">
+            &copy; 2021 YourFactory
+        </footer>
+    </div>
+</main>
+
+<script src="{{ url_for('static', filename='js/download.js') }}"></script>
+<script src="{{ url_for('static', filename='js/bootstrap.bundle.min.js') }}"></script>
+{#<script src="../static/js/bootstrap.bundle.min.js"></script>#}
+</body>
+</html>
