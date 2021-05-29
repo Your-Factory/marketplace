@@ -69,8 +69,8 @@
         <h4>Информация о модели</h4>
         <form class="requires-validation" action="/uploading" method="POST" enctype="multipart/form-data" name="fileForm" novalidate >
             <div class="col-md-5">
-                <label for="inputName">Имя пользователя</label>
-                <input class="form-control" type="text" placeholder="ИМЯ ПОЛЬЗОВАТЕЛЯ ИЗ ПРОФИЛЯ"
+                <label for="inputName">Пользователь</label>
+                <input class="form-control" type="text" placeholder="{{ user.email }}"
                        aria-label="inputName" disabled readonly>
             </div>
             <p></p>
