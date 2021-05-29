@@ -50,7 +50,7 @@
                         {% if user is none %}
                             <a class="nav-link" href="/login">Вход/Регистрация</a>
                         {% else %}
-                            <a class="nav-link" href="/login">{{ user.email }}</a>
+                            <a class="nav-link" href="/login">{{ user.email }} [Выйти]</a>
                         {% endif %}
                     </li>
                 </ul>

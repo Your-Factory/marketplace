@@ -1,9 +1,8 @@
 import os
-import logging
 from db import YourFactoryDB, User
-from flask import Flask, render_template, redirect, request, after_this_request
-from flask_login import LoginManager, login_user, login_required, current_user
-from tempfile import NamedTemporaryFile
+from flask import Flask, render_template, redirect, request
+from flask_login import (LoginManager, login_user, login_required, current_user,
+                         logout_user)
 from utils import get_heroku_params
 
 app = Flask(__name__)
@@ -44,8 +43,14 @@ def main_page():
 @app.route('/login')
 def login_page():
     if current_user.is_authenticated:
-        return redirect('/')
+        return redirect('/logout')
     return render_template('login.html')
+
+
+@app.route('/logout')
+def logout():
+    logout_user()
+    return redirect('/')
 
 
 @app.route('/checkout')
