@@ -67,7 +67,7 @@
         </div>
 
         <h4>Информация о модели</h4>
-        <form class="requires-validation" novalidate >
+        <form class="requires-validation" action="/uploading" method="POST" enctype="multipart/form-data" name="fileForm" novalidate >
             <div class="col-md-5">
                 <label for="inputName">Имя пользователя</label>
                 <input class="form-control" type="text" placeholder="ИМЯ ПОЛЬЗОВАТЕЛЯ ИЗ ПРОФИЛЯ"
@@ -83,7 +83,9 @@
             </div>
             <p></p>
             <div class="col-md-6">
-                <label for="inputText" class="form-label">Описание</label>
+                <label for="inputText" class="form-label">
+                    Описание
+                </label>
                 <textarea class="form-control" id="descriptionInput" rows="3" name="modelDescription" required></textarea>
                 <div class="invalid-feedback">
                     Заполните поле
@@ -92,22 +94,26 @@
             <p></p>
 
             <div class="col-md-6">
-                <label for="formFileMultiple" class="form-label">Файлы изображений модели</label>
-                <input class="form-control" type="file" id="formFileImg" accept=".jpg,.png" name="modelImages" multiple required>
+                <label for="formFileMultiple" class="form-label">
+                    Файлы изображений модели
+                </label>
+                <input class="form-control" type="file" id="formFileImg" accept=".jpg,.png" name="modelImages"multiple required>
                 <div class="invalid-feedback">
                     Проверьте расширение файла
                 </div>
             </div>
             <p></p>
             <div class="col-md-6">
-                <label for="formFile" class="form-label">Файл модели</label>
+                <label for="formFile" class="form-label">
+                    Файл модели
+                </label>
                 <input class="form-control" type="file" id="formFileModel" accept=".obj" name="modelFile" required >
                 <div class="invalid-feedback">
                     Проверьте расширение файла
                 </div>
             </div>
             <p></p>
-            <button type="submit" class="btn btn-primary" id="uploadButton" formaction="/upload_model_action" formmethod="post">
+            <button type="submit" class="btn btn-primary" id="uploadButton">
                 Загрузить
             </button>
         </form>

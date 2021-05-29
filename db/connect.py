@@ -36,9 +36,9 @@ class YourFactoryDB:
     def create_user(self, login, email, password):
         """
         Add new user to database.
-        :param login - users login:
-        :param email - users email:
-        :param password - users password:
+        :param login: users login
+        :param email: users email
+        :param password: users password
         :return: True if user was added, else False
         """
         salt = str(datetime.datetime.utcnow())
@@ -50,7 +50,6 @@ class YourFactoryDB:
             curr.execute("CALL add_user(%s, %s, %s, %s);",
                          (login, email, salt, password_hash))
             self.conn.commit()
-            curr.close()
         except psycopg2.DatabaseError as add_user_error:
             logging.warning(add_user_error)
             error = True
@@ -61,9 +60,9 @@ class YourFactoryDB:
 
     def check_user(self, login, email, password):
         """
-        :param login - users login:
-        :param email - users email:
-        :param password - users password:
+        :param login: users login
+        :param email: users email
+        :param password: users password
         :return: Id if user exists, else None
         """
         curr = self.conn.cursor()
@@ -83,3 +82,25 @@ class YourFactoryDB:
         finally:
             curr.close()
         return None
+
+    def add_model(self, name, description, model_file, author_id, model_format, images, images_formats):
+        """
+        Add new model to database
+        :param name: string
+        :param description: string
+        :param model_file: raw bytes of model file
+        :param author_id: int
+        :param model_format: string
+        :param images: list of raw images
+        :param images_formats: list of strings
+        :return: True if model was added, else False
+        """
+        curr = self.conn.cursor()
+        try:
+            curr.execute("CALL add_model(%s, %s, %s, %s, %s, %s, %s);",
+                         (name, description, model_file, author_id, model_format, images, images_formats))
+            self.conn.commit()
+        except psycopg2.DatabaseError as error:
+            logging.error(error)
+        finally:
+            curr.close()

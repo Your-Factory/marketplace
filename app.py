@@ -1,11 +1,10 @@
-import logging
 import os
-
 from db.connect import YourFactoryDB
 from db.user import User
 from flask import Flask, render_template, redirect, request
 from utils import get_heroku_params
 from flask_login import LoginManager, login_user, login_required, current_user
+
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = os.getenv("SECRET_KEY")
@@ -101,12 +100,26 @@ def upload_page():
     return render_template('upload_page.html', user=check_if_logged_in())
 
 
-@app.route('/upload_model_action"', methods=['POST'])
+@app.route('/uploading', methods=['GET', 'POST'])
 @login_required
-def upload_model():
-    model_name = request.form.get('modelName')
-    model_description = request.form.get('modelDescription')
-    logging.warning(model_name, model_description)
+def upload_image():
+    name = request.form.get("modelName")
+    description = request.form.get("modelDescription")
+    if request.method == "POST":
+        if request.files:
+            files = request.files
+            images_storage = files.getlist("modelImages")
+
+            images_names = [x.filename for x in images_storage]
+            images_formats = [os.path.splitext(x)[1] for x in images_names]
+            images_bytes = [x.read() for x in images_storage]
+
+            model_storage = files.getlist("modelFile")[0]
+            _, model_format = os.path.splitext(model_storage.filename)
+            model_file = model_storage.read()
+            author_id = current_user.id
+            database.add_model(name, description, model_file, author_id,
+                               model_format, images_bytes, images_formats)
     return redirect("/")
 
 
