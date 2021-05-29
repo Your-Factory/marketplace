@@ -38,7 +38,8 @@ def load_user(user_id):
 @app.route('/')
 def main_page():
     model_ids = "None"
-    return render_template('store_front.html', data=model_ids)
+    return render_template('store_front.html', data=model_ids,
+                           user=check_if_logged_in())
 
 
 @app.route('/login')
@@ -51,17 +52,17 @@ def login_page():
 @app.route('/checkout')
 @login_required
 def checkout_page():
-    return render_template('checkout.html')
+    return render_template('checkout.html', user=check_if_logged_in())
 
 
 @app.route('/model')
 def model_page():
-    return render_template('model_page.html')
+    return render_template('model_page.html', user=check_if_logged_in())
 
 
 @app.route('/about')
 def about_page():
-    return render_template('about.html')
+    return render_template('about.html', user=check_if_logged_in())
 
 
 @app.route('/registration', methods=['POST'])
@@ -97,7 +98,7 @@ def model3d_page():
 @app.route('/upload_model')
 @login_required
 def upload_page():
-    return render_template('upload_page.html')
+    return render_template('upload_page.html', user=check_if_logged_in())
 
 
 @app.route('/upload_model_action"', methods=['POST'])
@@ -107,3 +108,9 @@ def upload_model():
     model_description = request.form.get('modelDescription')
     logging.warning(model_name, model_description)
     return redirect("/")
+
+
+def check_if_logged_in():
+    if current_user.is_authenticated:
+        return current_user
+    return None
