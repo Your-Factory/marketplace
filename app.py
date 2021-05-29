@@ -77,3 +77,9 @@ def sign_in_post():
 @app.route('/model3d')
 def model3d_page():
     return render_template('model3d_page.html')
+
+
+@app.route('/upload_model')
+def upload_page():
+    return render_template('upload_page.html')
+
