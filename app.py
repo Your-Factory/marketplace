@@ -5,7 +5,7 @@ from db.connect import YourFactoryDB
 from db.user import User
 from flask import Flask, render_template, redirect, request
 from utils import get_heroku_params
-from flask_login import LoginManager, login_user, login_required
+from flask_login import LoginManager, login_user, login_required, current_user
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = os.getenv("SECRET_KEY")
@@ -43,6 +43,8 @@ def main_page():
 
 @app.route('/login')
 def login_page():
+    if current_user.is_authenticated:
+        return redirect('/')
     return render_template('login.html')
 
 
