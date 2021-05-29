@@ -116,8 +116,7 @@ class YourFactoryDB:
             curr.close()
 
         name, desc, model, m_type, imgs, fmts = data
-        model = json.dumps('\n'.join(bytes(model).decode().split('\n')[3:]))
-        # model = json.dumps(bytes(model).decode())
+        model = json.dumps(bytes(model).decode())
         imgs = list(zip([b64encode(bytes(img)).decode('ascii') for img in imgs],
                         fmts))
 

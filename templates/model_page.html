@@ -100,6 +100,11 @@
                                              width="70">
                                     </li>
                                 {% endfor %}
+                                <li class="3d_preview">
+                                    <img onclick='changeToScene(model_data)'
+                                         src="{{ url_for('static', filename='img/cube_3d.png') }}"
+                                         width="70" alt="">
+                                </li>
                                 {#                                <li><img onclick="changeImage(this)"#}
                                 {#                                         src="https://img-new.cgtrader.com/items/1004958/b45e10d10c/blender-monkey-suzanne-3d-model-obj-fbx-blend.jpg"#}
                                 {#                                         width="70" alt=""></li>#}
@@ -109,11 +114,6 @@
                                 {#                                <li><img onclick="changeImage(this)"#}
                                 {#                                         src="https://img1.cgtrader.com/items/1004958/faeb361228/blender-monkey-suzanne-3d-model-obj-fbx-blend.jpg"#}
                                 {#                                         width="70" alt=""></li>#}
-                                {#                                <li class="3d_preview">#}
-                                {#                                    <img onclick='changeToScene({{ data[2] }})'#}
-                                {#                                         src="{{ url_for('static', filename='img/cube_3d.png') }}"#}
-                                {#                                         width="70" alt="">#}
-                                {#                                </li>#}
                                 {# <li><img onclick="changeImage(this)"#}
                                 {# src="{{ url_for('static', filename='img/cube_3d.png') }}"#}
                                 {# width="70" alt=""></li>#}
@@ -165,6 +165,9 @@
 </script>
 {#<script src="{{ url_for('static', filename='js/bootstrap.bundle.min.js') }}"></script>#}
 <script src="{{ url_for('static', filename='js/model.js') }}"></script>
+<script type="text/javascript">
+    let model_data = {{ data[2] | tojson }};
+</script>
 
 </body>
 </html>

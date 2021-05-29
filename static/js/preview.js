@@ -1,18 +1,16 @@
 import * as THREE from "/static/js/three/three.module.js"
-import {DDSLoader} from "/static/js/three/DDSLoader.js";
-import {MTLLoader} from "/static/js/three/MTLLoader.js";
 import {OBJLoader} from "/static/js/three/OBJLoader.js";
 import {OrbitControls} from "/static/js/three/OrbitControls.js";
 
-let camera, scene, renderer, controls;
+let camera, scene, renderer, controls, object;
 
-function changeToScene(model_txt) {
+function changeToScene(model_json) {
     let main_image = document.getElementById('main_image');
     while (main_image.firstChild) {
         main_image.removeChild(main_image.lastChild);
     }
 
-    let model = JSON.parse(model_txt);
+    let model = JSON.parse(model_json);
 
     let container = document.createElement('div');
     container.setAttribute('class', 'main_product_image');
@@ -28,7 +26,7 @@ function init(container, model_bytes) {
 
     scene = new THREE.Scene();
 
-    const ambientLight = new THREE.AmbientLight(0x9ab4ff, 0.4);
+    const ambientLight = new THREE.AmbientLight(0x1c1c1c, 0.4);
     scene.add(ambientLight);
 
     const directionalLight = new THREE.DirectionalLight(0xffffff, 0.8);
@@ -49,20 +47,6 @@ function init(container, model_bytes) {
     let loader = new OBJLoader(manager);
     let model = loader.parse(model_bytes);
     scene.add(model);
-
-    // new MTLLoader(manager)
-    //     .setPath("/static/models")
-    //     .load('/suzanne.mtl', function (materials) {
-    //         materials.preload();
-    //
-    //         new OBJLoader(manager)
-    //             .setMaterials(materials)
-    //             .setPath("/static/models")
-    //             .load('/suzanne.obj', function (object) {
-    //                 object.position.y = 0;
-    //                 scene.add(object);
-    //             });
-    //     });
 
     renderer = new THREE.WebGLRenderer();
     renderer.setPixelRatio(window.devicePixelRatio);
