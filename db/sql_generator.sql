@@ -1,27 +1,7 @@
-create table users
-(
-    id            serial not null
-        constraint users_pk
-            primary key,
-    login         text   not null,
-    email         text   not null,
-    salt          text   not null,
-    password_hash text   not null
-);
-
-create unique index users_email_uindex
-    on users (email);
-
-create unique index users_id_uindex
-    on users (id);
-
-create unique index users_login_uindex
-    on users (login);
-
-create table tags
+create table image_formats
 (
     id   serial not null
-        constraint tags_pk
+        constraint image_formats_pk
             primary key,
     name text   not null
 );
@@ -38,20 +18,34 @@ create table material_types
 create unique index material_types_name_uindex
     on material_types (name);
 
-create table image_formats
-(
-    id   serial not null
-        constraint image_formats_pk
-            primary key,
-    name text   not null
-);
-
 create table model_formats
 (
     id   serial not null
         constraint model_formats_pk
             primary key,
     name text   not null
+);
+
+create unique index model_formats_id_uindex
+    on model_formats (id);
+
+create table tags
+(
+    id   serial not null
+        constraint tags_pk
+            primary key,
+    name text   not null
+);
+
+create table users
+(
+    id            serial not null
+        constraint users_pk
+            primary key,
+    login         text   not null,
+    email         text   not null,
+    salt          text   not null,
+    password_hash text   not null
 );
 
 create table models
@@ -69,26 +63,6 @@ create table models
     model_format_id integer not null
         constraint models_model_formats_id_fk
             references model_formats
-);
-
-create table model_tags
-(
-    id_model integer not null
-        constraint model_tags_models_id_fk
-            references models,
-    id_tag   integer not null
-        constraint model_tags_tags_id_fk
-            references tags
-);
-
-create table model_materials
-(
-    id_model    integer not null
-        constraint model_materials_models_id_fk
-            references models,
-    id_material integer
-        constraint model_materials_material_types_id_fk
-            references material_types
 );
 
 create table model_images
@@ -109,54 +83,41 @@ create table model_images
 create unique index model_images_id_image_uindex
     on model_images (id_image);
 
-create unique index model_formats_id_uindex
-    on model_formats (id);
+create table model_materials
+(
+    id_model    integer not null
+        constraint model_materials_models_id_fk
+            references models,
+    id_material integer
+        constraint model_materials_material_types_id_fk
+            references material_types
+);
 
-create or replace function check_user_authentication(u_login text, u_password_hash text) returns boolean
-    immutable
-    language plpgsql
-as
-$$
-DECLARE
-    n_rows int;
-BEGIN
-    SELECT COUNT(*)
-    FROM public.users AS users
-    WHERE users.login = u_login
-      AND users.password_hash = u_password_hash
-    INTO n_rows;
-    RETURN n_rows = 1;
-END
-$$;
+create table model_tags
+(
+    id_model integer not null
+        constraint model_tags_models_id_fk
+            references models,
+    id_tag   integer not null
+        constraint model_tags_tags_id_fk
+            references tags
+);
 
-create or replace procedure add_user(u_login text, u_email text, u_salt text, u_password_hash text)
-    language sql
-as
-$$
-INSERT INTO users(login, email, salt, password_hash)
-VALUES (u_login, u_email, u_salt, u_password_hash);
-$$;
+create unique index users_email_uindex
+    on users (email);
 
-create or replace procedure create_tag(t_name text)
-    language plpgsql
-as
-$$
-BEGIN
-    insert into tags(name) values (t_name);
-END
-$$;
+create unique index users_id_uindex
+    on users (id);
 
-create or replace function get_tags()
-    returns TABLE
-            (
-                id   integer,
-                name text
-            )
+create unique index users_login_uindex
+    on users (login);
+
+create or replace procedure add_image_format(f_name text)
     language plpgsql
 as
 $$
 BEGIN
-    return query select * from tags;
+    insert into image_formats(name) values (f_name);
 END
 $$;
 
@@ -169,12 +130,22 @@ BEGIN
 END
 $$;
 
-create or replace procedure add_image_format(f_name text)
+create or replace procedure add_model(m_name text, m_description text, m_preview bytea, m_model_file bytea,
+                                      m_author_id integer, m_model_format_id integer, m_tags integer[],
+                                      m_images bytea[], m_images_descriptions text[], m_images_formats_id integer[],
+                                      m_materials integer[])
     language plpgsql
 as
 $$
+DECLARE
+    model_id int;
 BEGIN
-    insert into image_formats(name) values (f_name);
+    call add_model_information(m_name, m_description, m_preview,
+                               m_model_file, m_author_id, m_model_format_id);
+    select currval(pg_get_serial_sequence('models', 'id')) into model_id;
+
+    call add_tags_images_materials_to_model(model_id, m_tags, m_images,
+                                            m_images_descriptions, m_images_formats_id, m_materials);
 END
 $$;
 
@@ -198,25 +169,6 @@ BEGIN
     select nextval(pg_get_serial_sequence('models', 'id')) into model_id;
     insert into models(name, description, preview, model_file, author_id, model_format_id)
     values (m_name, m_description, m_preview, m_model_file, m_author_id, m_model_format_id);
-END
-$$;
-
-create or replace procedure add_model(m_name text, m_description text, m_preview bytea, m_model_file bytea,
-                                      m_author_id integer, m_model_format_id integer, m_tags integer[],
-                                      m_images bytea[], m_images_descriptions text[], m_images_formats_id integer[],
-                                      m_materials integer[])
-    language plpgsql
-as
-$$
-DECLARE
-    model_id int;
-BEGIN
-    call add_model_information(m_name, m_description, m_preview,
-                               m_model_file, m_author_id, m_model_format_id);
-    select currval(pg_get_serial_sequence('models', 'id')) into model_id;
-
-    call add_tags_images_materials_to_model(model_id, m_tags, m_images,
-                                            m_images_descriptions, m_images_formats_id, m_materials);
 END
 $$;
 
@@ -250,21 +202,37 @@ BEGIN
 END
 $$;
 
-create or replace function get_model_previews()
-    returns TABLE
-            (
-                id      integer,
-                name    text,
-                preview bytea,
-                author  text
-            )
+create or replace procedure add_user(u_login text, u_email text, u_salt text, u_password_hash text)
+    language sql
+as
+$$
+INSERT INTO users(login, email, salt, password_hash)
+VALUES (u_login, u_email, u_salt, u_password_hash);
+$$;
+
+create or replace function check_user_authentication(u_login text, u_password_hash text) returns boolean
+    immutable
+    language plpgsql
+as
+$$
+DECLARE
+    u_id int;
+BEGIN
+    SELECT users.id
+    FROM public.users AS users
+    WHERE users.login = u_login
+      AND users.password_hash = u_password_hash
+    INTO u_id;
+    RETURN u_id;
+END
+$$;
+
+create or replace procedure create_tag(t_name text)
     language plpgsql
 as
 $$
 BEGIN
-    return query select models.id, name, preview, users.login
-                 from models
-                          join users on author_id = users.id;
+    insert into tags(name) values (t_name);
 END
 $$;
 
@@ -287,6 +255,53 @@ BEGIN
              join image_formats on model_images.image_format_id = image_formats.id
     where model_images.id_model = m_id;
 
+END
+$$;
+
+create or replace function get_model_previews()
+    returns TABLE
+            (
+                id      integer,
+                name    text,
+                preview bytea,
+                author  text
+            )
+    language plpgsql
+as
+$$
+BEGIN
+    return query select models.id, name, preview, users.login
+                 from models
+                          join users on author_id = users.id;
+END
+$$;
+
+create or replace function get_tags()
+    returns TABLE
+            (
+                id   integer,
+                name text
+            )
+    language plpgsql
+as
+$$
+BEGIN
+    return query select * from tags;
+END
+$$;
+
+create or replace function get_user_salt(u_login text) returns text
+    language plpgsql
+as
+$$
+DECLARE
+    usalt text;
+BEGIN
+    SELECT users.salt
+    FROM public.users AS users
+    WHERE users.login = u_login
+    INTO usalt;
+    RETURN usalt;
 END
 $$;
 
