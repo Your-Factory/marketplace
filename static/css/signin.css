@@ -42,6 +42,14 @@ body {
     border-top-right-radius: 0;
 }
 
+.form-signin button[id="loginButton"] {
+    margin: 1px;
+}
+
+.form-signin button[id="registrationButton"] {
+    margin: 1px;
+}
+
 .bd-placeholder-img {
     font-size: 1.125rem;
     text-anchor: middle;
