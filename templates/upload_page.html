@@ -42,7 +42,8 @@
                         <a class="nav-link" href="#">Корзина</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" href="/upload_model">Загрузить модель</a>
+                        <a class="nav-link active" href="/upload_model" name="upload_model"
+                           formaction="/model_uploading">Загрузить модель</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="/login">Вход/Регистрация</a>
@@ -70,7 +71,7 @@
             <p></p>
             <div class="col-md-5">
                 <label for="inputText">Название модели</label>
-                <input type="text" class="form-control" id="inputText" required>
+                <input type="text" class="form-control" id="inputText" name="modelName" required>
                 <div class="invalid-feedback">
                     Заполните поле
                 </div>
@@ -78,7 +79,7 @@
             <p></p>
             <div class="col-md-6">
                 <label for="inputText" class="form-label">Описание</label>
-                <textarea class="form-control" id="inputText" rows="3" required></textarea>
+                <textarea class="form-control" id="descriptionInput" rows="3" name="modelDescription" required></textarea>
                 <div class="invalid-feedback">
                     Заполните поле
                 </div>
@@ -87,7 +88,7 @@
 
             <div class="col-md-6">
                 <label for="formFileMultiple" class="form-label">Файлы изображений модели</label>
-                <input class="form-control" type="file" id="formFileImg" accept=".jpg,.png" multiple required>
+                <input class="form-control" type="file" id="formFileImg" accept=".jpg,.png" name="modelImages" multiple required>
                 <div class="invalid-feedback">
                     Проверьте расширение файла
                 </div>
@@ -95,22 +96,15 @@
             <p></p>
             <div class="col-md-6">
                 <label for="formFile" class="form-label">Файл модели</label>
-                <input class="form-control" type="file" id="formFileModel" accept=".obj" required>
+                <input class="form-control" type="file" id="formFileModel" accept=".obj" name="modelFile" required >
                 <div class="invalid-feedback">
                     Проверьте расширение файла
                 </div>
             </div>
-
-
             <p></p>
-            <div class="form-group">
-                <div class="form-check">
-                    <label class="form-check-label">
-                        <input class="form-check-input" type="checkbox"> Соглашение на обработку
-                    </label>
-                </div>
-            </div>
-            <button type="submit" class="btn btn-primary">Загрузить</button>
+            <button type="submit" class="btn btn-primary" id="uploadButton" formaction="/upload_model_action" formmethod="post">
+                Загрузить
+            </button>
         </form>
 
 
