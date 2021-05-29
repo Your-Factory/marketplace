@@ -6,7 +6,7 @@
 
     <link href="{{ url_for('static', filename='css/bootstrap.min.css') }}" rel="stylesheet">
     {#    Custom styles for this template#}
-    <link href="{{ url_for('static', filename='css/download_model.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/upload_model.css') }}" rel="stylesheet">
 
 </head>
 <body>
@@ -42,7 +42,7 @@
                         <a class="nav-link" href="#">Корзина</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" href="/download_model">Загрузить модель</a>
+                        <a class="nav-link active" href="/upload_model">Загрузить модель</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="/login">Вход/Регистрация</a>
@@ -71,12 +71,17 @@
             <div class="col-md-5">
                 <label for="inputText">Название модели</label>
                 <input type="text" class="form-control" id="inputText" required>
-
+                <div class="invalid-feedback">
+                    Заполните поле
+                </div>
             </div>
             <p></p>
             <div class="col-md-6">
                 <label for="inputText" class="form-label">Описание</label>
                 <textarea class="form-control" id="inputText" rows="3" required></textarea>
+                <div class="invalid-feedback">
+                    Заполните поле
+                </div>
             </div>
             <p></p>
 
@@ -91,6 +96,9 @@
             <div class="col-md-6">
                 <label for="formFile" class="form-label">Файл модели</label>
                 <input class="form-control" type="file" id="formFileModel" accept=".obj" required>
+                <div class="invalid-feedback">
+                    Проверьте расширение файла
+                </div>
             </div>
 
 
@@ -112,7 +120,7 @@
     </div>
 </main>
 
-<script src="{{ url_for('static', filename='js/download.js') }}"></script>
+<script src="{{ url_for('static', filename='js/upload.js') }}"></script>
 <script src="{{ url_for('static', filename='js/bootstrap.bundle.min.js') }}"></script>
 {#<script src="../static/js/bootstrap.bundle.min.js"></script>#}
 </body>

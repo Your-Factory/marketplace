@@ -39,7 +39,7 @@ def model3d_page():
     return render_template('model3d_page.html')
 
 
-@app.route('/download_model')
-def download_page():
-    return render_template('download_page.html')
+@app.route('/upload_model')
+def upload_page():
+    return render_template('upload_page.html')
 
