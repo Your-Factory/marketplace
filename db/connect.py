@@ -1,4 +1,5 @@
 import psycopg2
+import json
 import logging
 import hashlib
 import datetime
@@ -101,6 +102,26 @@ class YourFactoryDB:
             return i, name, b64encode(bytes(img)).decode('ascii'), fmt
 
         return map(unpack, previews)
+
+    def get_model(self, model_id):
+        curr = self.conn.cursor()
+        data = None
+
+        try:
+            curr.execute("SELECT * FROM get_model(%s);", (model_id,))
+            data = curr.fetchone()
+        except psycopg2.DatabaseError as error:
+            logging.error(error)
+        finally:
+            curr.close()
+
+        name, desc, model, m_type, imgs, fmts = data
+        model = json.dumps('\n'.join(bytes(model).decode().split('\n')[3:]))
+        # model = json.dumps(bytes(model).decode())
+        imgs = list(zip([b64encode(bytes(img)).decode('ascii') for img in imgs],
+                        fmts))
+
+        return name, desc, model, m_type, imgs
 
     def add_model(self, name, description, model_file, author_id, model_format,
                   images, images_formats):

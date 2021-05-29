@@ -89,24 +89,31 @@
                 <div class="col-md-6 border-end">
                     <div class="d-flex flex-column justify-content-center">
                         <div class="main_image" id="main_image"><img
-                                src="https://img-new.cgtrader.com/items/1004958/b45e10d10c/blender-monkey-suzanne-3d-model-obj-fbx-blend.jpg"
+                                src="data:image/{{ data[4][0][1][1:] }};base64,{{ data[4][0][0] }}"
                                 id="main_product_image" width="500" alt=""></div>
                         <div class="thumbnail_images">
                             <ul id="thumbnail">
-                                <li><img onclick="changeImage(this)"
-                                         src="https://img-new.cgtrader.com/items/1004958/b45e10d10c/blender-monkey-suzanne-3d-model-obj-fbx-blend.jpg"
-                                         width="70" alt=""></li>
-                                <li><img onclick="changeImage(this)"
-                                         src="https://img2.cgtrader.com/items/1004958/703a4660df/blender-monkey-suzanne-3d-model-obj-fbx-blend.jpg"
-                                         width="70" alt=""></li>
-                                <li><img onclick="changeImage(this)"
-                                         src="https://img1.cgtrader.com/items/1004958/faeb361228/blender-monkey-suzanne-3d-model-obj-fbx-blend.jpg"
-                                         width="70" alt=""></li>
-                                <li class="3d_preview">
-                                    <img onclick="changeToScene()"
-                                         src="{{ url_for('static', filename='img/cube_3d.png') }}"
-                                         width="70" alt="">
-                                </li>
+                                {% for img, fmt in data[4] %}
+                                    <li>
+                                        <img onclick="changeImage(this)"
+                                             src="data:image/{{ fmt[1:] }};base64,{{ img }}"
+                                             width="70">
+                                    </li>
+                                {% endfor %}
+                                {#                                <li><img onclick="changeImage(this)"#}
+                                {#                                         src="https://img-new.cgtrader.com/items/1004958/b45e10d10c/blender-monkey-suzanne-3d-model-obj-fbx-blend.jpg"#}
+                                {#                                         width="70" alt=""></li>#}
+                                {#                                <li><img onclick="changeImage(this)"#}
+                                {#                                         src="https://img2.cgtrader.com/items/1004958/703a4660df/blender-monkey-suzanne-3d-model-obj-fbx-blend.jpg"#}
+                                {#                                         width="70" alt=""></li>#}
+                                {#                                <li><img onclick="changeImage(this)"#}
+                                {#                                         src="https://img1.cgtrader.com/items/1004958/faeb361228/blender-monkey-suzanne-3d-model-obj-fbx-blend.jpg"#}
+                                {#                                         width="70" alt=""></li>#}
+                                {#                                <li class="3d_preview">#}
+                                {#                                    <img onclick='changeToScene({{ data[2] }})'#}
+                                {#                                         src="{{ url_for('static', filename='img/cube_3d.png') }}"#}
+                                {#                                         width="70" alt="">#}
+                                {#                                </li>#}
                                 {# <li><img onclick="changeImage(this)"#}
                                 {# src="{{ url_for('static', filename='img/cube_3d.png') }}"#}
                                 {# width="70" alt=""></li>#}
@@ -117,10 +124,10 @@
                 <div class="col-md-6">
                     <div class="p-3 right-side">
                         <div class="d-flex justify-content-between align-items-center">
-                            <h3>Сюзанна</h3>
+                            <h3>{{ data[0] }}</h3>
                         </div>
                         <div class="mt-2 pr-3 content">
-                            <p>ОПИСАНИЯ ОПИМСАНИЕ ОПИСАНИЯ</p>
+                            <p>{{ data[1] }}</p>
                         </div>
                         <div class="m-bot15"><strong>Price : </strong> <span class="amount-old">$544</span></div>
                         <div class="ratings d-flex flex-row align-items-center">

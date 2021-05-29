@@ -1,10 +1,10 @@
 import os
 import logging
 from db import YourFactoryDB, User
-from flask import Flask, render_template, redirect, request
-from utils import get_heroku_params
+from flask import Flask, render_template, redirect, request, after_this_request
 from flask_login import LoginManager, login_user, login_required, current_user
-
+from tempfile import NamedTemporaryFile
+from utils import get_heroku_params
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = os.getenv("SECRET_KEY")
@@ -37,7 +37,6 @@ def load_user(user_id):
 @app.route('/')
 def main_page():
     models = database.get_previews()
-    logging.error(f'{models}')
     return render_template('store_front.html', models=models,
                            user=check_if_logged_in())
 
@@ -55,9 +54,11 @@ def checkout_page():
     return render_template('checkout.html', user=check_if_logged_in())
 
 
-@app.route('/model')
-def model_page():
-    return render_template('model_page.html', user=check_if_logged_in())
+@app.route('/model/<model_id>')
+def model_page(model_id):
+    data = database.get_model(model_id)
+    return render_template('model_page.html', data=data,
+                           user=check_if_logged_in())
 
 
 @app.route('/about')
