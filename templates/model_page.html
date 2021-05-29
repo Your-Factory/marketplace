@@ -1,31 +1,33 @@
-<!DOCTYPE html>
-<html lang="ru">
+<!doctype html>
+<html lang="ru" xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Модель</title>
-    {#    Fonts#}
-    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" rel="stylesheet">
-    {#    CSS#}
-    <link href="{{ url_for('static', filename='css/model.css') }}" rel="stylesheet">
-    <meta name="robots" content="noindex,follow"/>
+    <meta name="description" content="">
+    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+    <meta name="generator" content="Hugo 0.83.1">
+    <title>Маркетплейс</title>
 
-    {#    Bootstrap core CSS#}
+    <link rel="canonical" href="https://getbootstrap.com/docs/5.0/examples/album/">
+
+
+    {# Bootstrap core CSS #}
     <link href="{{ url_for('static', filename='css/bootstrap.min.css') }}" rel="stylesheet">
 
+    {# Custom styles for this template#}
+    <link href="{{ url_for('static', filename='css/model.css') }}" rel="stylesheet">
+
 </head>
-
 <body>
-
 <header>
     <nav class="navbar navbar-expand-lg navbar-dark fixed-top bg-dark">
         <div class="container">
-                <a class="navbar-brand" href="/">YourFactory</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                        data-bs-target="#navbarSupportedContent"
-                        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
+            <a class="navbar-brand" href="/">YourFactory</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarSupportedContent"
+                    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item">
@@ -37,7 +39,7 @@
                 </ul>
             </div>
             <div class="collapse navbar-collapse justify-content-center" id="navbarSupportedContent">
-                 <form class="form-inline d-flex mx-lg-auto rounded p-1">
+                <form class="form-inline d-flex mx-lg-auto rounded p-1">
                     <input class="form-control mr-sm-1" type="search" placeholder="Search"
                            aria-label="Найдите нужную модель">
                     <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Поиск</button>
@@ -57,67 +59,87 @@
     </nav>
 </header>
 
-<main class="container">
 
-    {#     Left Column / Headphones Image#}
-    <div class="left-column">
-        {#        <img data-image="black" src="{{ url_for('static', filename='img/black.png') }}" alt="">#}
-        {#        <img data-image="blue" src="{{ url_for('static', filename='img/blue.png') }}" alt="">#}
-        <img class="active p-5" src="{{ url_for('static', filename='img/harley.jpg') }}" alt="">
-    </div>
-
-    {#    Right Column#}
-    <div class="right-column">
-
-        {#         Product Description#}
-        <div class="product-description">
-            {#            <span>Headphones</span>#}
-            <h1>Харли Куинн - 3D-модель для 3D-печати</h1>
-            <p>Харли Куинн !!! Безумно красивая Харли Куинн из Suicide Squad в новой версии. STL-файл для 3D-печати в
-                качестве HI-POLY. Эта дама - один из самых важных персонажей игры Batman: Arkham Asylum.
+<main>
+    <section class="py-5 text-center container">
+        <div class="row py-lg-5">
+            <div class="col-lg-6 col-md-8 mx-auto">
+                <!--  <p></p>
+                  <h1 class="fw-light">YourFactory marketplace</h1>
+                  <p class="lead text-muted">Описание по поводу моделей</p>-->
+                <!--<p>
+                    <a href="#" class="btn btn-primary my-2">Возможная кнопка</a>
+                    <a href="#" class="btn btn-secondary my-2">Возможная кнопка</a>
+                </p>-->
+            </div>
         </div>
-
-        {#        Product Configuration#}
-        {#        <div class="product-configuration">#}
-        {##}
-        {#        Product Color#}
-        {#        <div class="product-color">#}
-        {#            <span>Color</span>#}
-        {##}
-        {#            <div class="color-choose">#}
-        {#                <div>#}
-        {#                    <input data-image="red" type="radio" id="red" name="color" value="red" checked>#}
-        {#                    <label for="red"><span></span></label>#}
-        {#                </div>#}
-        {#                <div>#}
-        {#                    <input data-image="blue" type="radio" id="blue" name="color" value="blue">#}
-        {#                    <label for="blue"><span></span></label>#}
-        {#                </div>#}
-        {#                <div>#}
-        {#                    <input data-image="black" type="radio" id="black" name="color" value="black">#}
-        {#                    <label for="black"><span></span></label>#}
-        {#                </div>#}
-        {#            </div>#}
-        {##}
-        {#        </div>#}
-        {#        #}
-        {#        <div class="product-price p-1">#}
-        {#            <span id="Price">148$ × </span><input type="text" id="AmountOfModelsToBuy" maxlength="10"#}
-        {#                                                  style="width: 75px;"/>#}
-        {#        </div>#}
-
-        {#    Product Pricing#}
-        <div class="product-price p-1">
-            <span id="FinalPrice">148$</span>
-            <a href="/checkout" class="cart-btn btn-secondary">Добавить в корзину</a>
+    </section>
+    <section class="container mt-5 mb-5">
+        <div class="card">
+            <div class="row g-0">
+                <div class="col-md-6 border-end">
+                    <div class="d-flex flex-column justify-content-center">
+                        <div class="main_image"><img
+                                src="https://img-new.cgtrader.com/items/1004958/b45e10d10c/blender-monkey-suzanne-3d-model-obj-fbx-blend.jpg"
+                                id="main_product_image" width="500" alt=""></div>
+                        <div class="thumbnail_images">
+                            <ul id="thumbnail">
+                                <li><img onclick="changeImage(this)"
+                                         src="https://img-new.cgtrader.com/items/1004958/b45e10d10c/blender-monkey-suzanne-3d-model-obj-fbx-blend.jpg"
+                                         width="70" alt=""></li>
+                                <li><img onclick="changeImage(this)"
+                                         src="https://img2.cgtrader.com/items/1004958/703a4660df/blender-monkey-suzanne-3d-model-obj-fbx-blend.jpg"
+                                         width="70" alt=""></li>
+                                <li><img onclick="changeImage(this)"
+                                         src="https://img1.cgtrader.com/items/1004958/faeb361228/blender-monkey-suzanne-3d-model-obj-fbx-blend.jpg"
+                                         width="70" alt=""></li>
+                                <li><img onclick="changeImage(this)"
+                                         src="https://img1.cgtrader.com/items/1004958/38a02902d2/blender-monkey-suzanne-3d-model-obj-fbx-blend.jpg"
+                                         width="70" alt=""></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="p-3 right-side">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <h3>Сюзанна</h3>
+                        </div>
+                        <div class="mt-2 pr-3 content">
+                            <p>ОПИСАНИЯ ОПИМСАНИЕ ОПИСАНИЯ</p>
+                        </div>
+                        <div class="m-bot15"><strong>Price : </strong> <span class="amount-old">$544</span></div>
+                        <div class="ratings d-flex flex-row align-items-center">
+                            <div class="d-flex flex-row"><i class='bx bxs-star'></i> <i class='bx bxs-star'></i> <i
+                                    class='bx bxs-star'></i> <i class='bx bxs-star'></i> <i class='bx bx-star'></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="buttons d-flex flex-row mt-5 gap-3 justify-content-center">
+                        <form method="get" action="/checkout">
+                            <button type="submit" class="btn btn-dark">Купить сейчас
+                            </button>
+                        </form>
+                        <form method="get" action="/model3d">
+                            <button type="submit" class="btn btn-outline-dark">Посмотреть
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
         </div>
-    </div>
-    </div>
+    </section>
 </main>
 
-{# Scripts #}
+<footer class="text-muted py-5">
+    <div class="container">
+        <p class="mb-1"> &copy;2021 YourFactory</p>
+    </div>
+</footer>
+
 <script src="../static/js/bootstrap.bundle.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js" charset="utf-8"></script>
-<script src="{{ url_for('static', filename='js/model.js') }}" charset="utf-8"></script>
+<script src="../static/js/model.js"></script>
+
+
 </body>
 </html>

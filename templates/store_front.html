@@ -11,10 +11,10 @@
     <link rel="canonical" href="https://getbootstrap.com/docs/5.0/examples/album/">
 
 
-    {#    Bootstrap core CSS #}
+    {# Bootstrap core CSS #}
     <link href="{{ url_for('static', filename='css/bootstrap.min.css') }}" rel="stylesheet">
 
-    {#    Custom styles for this template#}
+    {# Custom styles for this template#}
     <link href="{{ url_for('static', filename='css/store_front.css') }}" rel="stylesheet">
 
 </head>
@@ -22,12 +22,12 @@
 <header>
     <nav class="navbar navbar-expand-lg navbar-dark fixed-top bg-dark">
         <div class="container">
-                <a class="navbar-brand" href="/">YourFactory</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                        data-bs-target="#navbarSupportedContent"
-                        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
+            <a class="navbar-brand" href="/">YourFactory</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarSupportedContent"
+                    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item">
@@ -39,7 +39,7 @@
                 </ul>
             </div>
             <div class="collapse navbar-collapse justify-content-center" id="navbarSupportedContent">
-                 <form class="form-inline d-flex mx-lg-auto rounded p-1">
+                <form class="form-inline d-flex mx-lg-auto rounded p-1">
                     <input class="form-control mr-sm-1" type="search" placeholder="Search"
                            aria-label="Найдите нужную модель">
                     <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Поиск</button>
@@ -67,10 +67,6 @@
                 <p></p>
                 <h1 class="fw-light">YourFactory marketplace</h1>
                 <p class="lead text-muted">Описание описания</p>
-                <p>
-                    <a href="#" class="btn btn-primary my-2">Возможная кнопка</a>
-                    <a href="#" class="btn btn-secondary my-2">Возможная кнопка</a>
-                </p>
             </div>
         </div>
     </section>
@@ -79,35 +75,23 @@
             <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
                 <div class="col">
                     <div class="card shadow-sm">
-                        {#
-                        <svg class="bd-placeholder-img card-img-top" width="100%" height="225" #}
-                        {# xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" #}
-                        {# preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title>#}
-                        {#
-                            <!--  <img data-image="red" class="active" src="{{ url_for('static', filename='img/red.png') }}"-->
-                            alt="">#}
-                        {#
-                            <rect width="100%" height="100%" fill="#55595c"/>
-                            #}
-                        {#
-                            <text x="50%" y="50%" fill="#eceeef" dy=".3em">Модель</text>
-                            #}
-                        {#
-                        </svg>
-                        #}
-                        <img src="https://assets.pinshape.com/uploads/image/file/157010/harley-quinn-3d-model-for-3d-printing-3d-printing-157010.jpg">
+                        <img src="https://img-new.cgtrader.com/items/1004958/b45e10d10c/blender-monkey-suzanne-3d-model-obj-fbx-blend.jpg"
+                             alt="">
                         <div class="card-body">
-                            <p class="card-text">Harley Quinn - 3D Model for 3D Printing</p>
+                            <p class="card-text">Suzanne monkey 3d model</p>
                             <div class="d-flex justify-content-between align-items-center">
                                 <div class="btn-group">
                                     <form method="get" action="/model">
                                         <button type="submit" class="btn btn-sm btn-outline-secondary">Посмотреть
                                         </button>
                                     </form>
-                                    {#                                    Если это модель юзера#}
-                                    {#                                    <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>#}
+                                    {# Если это модель юзера#}
+                                    {#
+                                    <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+
                                 </div>
-                                {#                                <small class="text-muted">Price</small>#}
+                                {# <small class="text-muted">Price</small>#}
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -122,13 +106,12 @@
         <p class="float-end mb-1">
             <a href="#">Вверх</a>
         </p>
-        <p class="mb-1"> &copy; YourFactory</p>
+        <p class="mb-1"> &copy;2021 YourFactory</p>
 
     </div>
 </footer>
 
 <script src="../static/js/bootstrap.bundle.min.js"></script>
-
 
 
 </body>
