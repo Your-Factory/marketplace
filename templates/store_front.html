@@ -81,29 +81,25 @@
     <div class="album py-5 bg-light">
         <div class="container">
             <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-                <div class="col">
-                    <div class="card shadow-sm">
-                        <img src="https://img-new.cgtrader.com/items/1004958/b45e10d10c/blender-monkey-suzanne-3d-model-obj-fbx-blend.jpg"
-                             alt="">
-                        <div class="card-body">
-                            <p class="card-text">Suzanne monkey 3d model</p>
-                            <div class="d-flex justify-content-between align-items-center">
-                                <div class="btn-group">
-                                    <form method="get" action="/model">
-                                        <button type="submit" class="btn btn-sm btn-outline-secondary">Посмотреть
-                                        </button>
-                                    </form>
-                                    {# Если это модель юзера#}
-                                    {#
-                                    <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
-
-                                </div>
-                                {# <small class="text-muted">Price</small>#}
+                {% for id, name, preview, format in models %}
+                    <div class="col-md-3">
+                        <div class="card shadow-sm">
+                            <img class="card-img-top" src="data:image/{{ format[1:] }};base64,{{ preview }}"
+                                 alt="">
+                            <div class="card-body">
+                                <p class="card-text">{{ name }}</p>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="btn-group">
+                                        <form method="get" action="/model">
+                                            <button type="submit" class="btn btn-sm btn-outline-secondary">Посмотреть
+                                            </button>
+                                        </form>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
+                {% endfor %}
             </div>
         </div>
     </div>

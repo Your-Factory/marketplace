@@ -2,6 +2,7 @@ import psycopg2
 import logging
 import hashlib
 import datetime
+from base64 import b64encode
 
 
 class YourFactoryDB:
@@ -83,7 +84,26 @@ class YourFactoryDB:
             curr.close()
         return None
 
-    def add_model(self, name, description, model_file, author_id, model_format, images, images_formats):
+    def get_previews(self):
+        curr = self.conn.cursor()
+        previews = []
+
+        try:
+            curr.execute("SELECT * FROM get_model_previews();")
+            previews.extend(curr.fetchall())
+        except psycopg2.DatabaseError as error:
+            logging.error(error)
+        finally:
+            curr.close()
+
+        def unpack(x):
+            i, name, img, fmt = x
+            return i, name, b64encode(bytes(img)).decode('ascii'), fmt
+
+        return map(unpack, previews)
+
+    def add_model(self, name, description, model_file, author_id, model_format,
+                  images, images_formats):
         """
         Add new model to database
         :param name: string
@@ -98,7 +118,10 @@ class YourFactoryDB:
         curr = self.conn.cursor()
         try:
             curr.execute("CALL add_model(%s, %s, %s, %s, %s, %s, %s);",
-                         (name, description, model_file, author_id, model_format, images, images_formats))
+                         (
+                             name, description, model_file, author_id,
+                             model_format,
+                             images, images_formats))
             self.conn.commit()
         except psycopg2.DatabaseError as error:
             logging.error(error)

@@ -1,6 +1,6 @@
 import os
-from db.connect import YourFactoryDB
-from db.user import User
+import logging
+from db import YourFactoryDB, User
 from flask import Flask, render_template, redirect, request
 from utils import get_heroku_params
 from flask_login import LoginManager, login_user, login_required, current_user
@@ -36,8 +36,9 @@ def load_user(user_id):
 
 @app.route('/')
 def main_page():
-    model_ids = "None"
-    return render_template('store_front.html', data=model_ids,
+    models = database.get_previews()
+    logging.error(f'{models}')
+    return render_template('store_front.html', models=models,
                            user=check_if_logged_in())
 
 

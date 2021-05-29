@@ -1,1 +1,2 @@
-from .connect import *
+from .connect import YourFactoryDB
+from .user import User
