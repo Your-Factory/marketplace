@@ -51,7 +51,6 @@ def model_page():
 def about_page():
     return render_template('about.html')
 
-
 @app.route('/registration', methods=['POST'])
 def registration_post():
     email = request.form.get('email')
@@ -75,3 +74,6 @@ def sign_in_post():
         return redirect("/")
     return redirect("/login")
 
+@app.route('/model3d')
+def model3d_page():
+    return render_template('model3d_page.html')
