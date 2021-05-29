@@ -5,7 +5,8 @@ import datetime
 
 
 class YourFactoryDB:
-    def __init__(self, host=None, database_url=None, database=None, user=None, password=None, port=5432):
+    def __init__(self, host=None, database_url=None, database=None, user=None,
+                 password=None, port=5432):
         self.host = host
         self.database_url = database_url
         self.db = database
@@ -17,10 +18,16 @@ class YourFactoryDB:
     def connect(self):
         try:
             if self.database_url is None:
-                self.conn = psycopg2.connect(host=self.host, database=self.db, user=self.user,
-                                             password=self.password, port=self.port)
+                self.conn = psycopg2.connect(
+                    host=self.host, database=self.db,
+                    user=self.user, password=self.password,
+                    port=self.port
+                )
             else:
-                self.conn = psycopg2.connect(self.database_url, sslmode='require')
+                self.conn = psycopg2.connect(
+                    self.database_url,
+                    sslmode='require'
+                )
             return True
         except psycopg2.DatabaseError as connection_error:
             logging.warning(connection_error)
@@ -35,11 +42,13 @@ class YourFactoryDB:
         :return: True if user was added, else False
         """
         salt = str(datetime.datetime.utcnow())
-        password_hash = hashlib.sha256((password + salt).encode('utf-8')).hexdigest()
+        password_hash = hashlib.sha256(
+            (password + salt).encode('utf-8')).hexdigest()
         curr = self.conn.cursor()
         error = False
         try:
-            curr.execute("CALL add_user(%s, %s, %s, %s);", (login, email, salt, password_hash))
+            curr.execute("CALL add_user(%s, %s, %s, %s);",
+                         (login, email, salt, password_hash))
             self.conn.commit()
             curr.close()
         except psycopg2.DatabaseError as add_user_error:
@@ -59,12 +68,14 @@ class YourFactoryDB:
         """
         curr = self.conn.cursor()
         try:
-            curr.execute("SELECT * FROM get_user_salt(%s);", (login, ))
+            curr.execute("SELECT * FROM get_user_salt(%s);", (login,))
             salt = curr.fetchone()[0]
             if salt is None:
                 return None
-            password_hash = hashlib.sha256((password + salt).encode('utf-8')).hexdigest()
-            curr.execute("SELECT * FROM check_user_authentication(%s, %s)", (login, password_hash))
+            password_hash = hashlib.sha256(
+                (password + salt).encode('utf-8')).hexdigest()
+            curr.execute("SELECT * FROM check_user_authentication(%s, %s)",
+                         (login, password_hash))
             user_id = curr.fetchone()[0]
             return user_id
         except psycopg2.DatabaseError as error:

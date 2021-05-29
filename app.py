@@ -1,14 +1,11 @@
 import logging
 import os
 
-import requests
-import hashlib
 from db.connect import YourFactoryDB
 from db.user import User
 from flask import Flask, render_template, redirect, request
 from utils.env_helper import get_heroku_params
 from flask_login import LoginManager, login_user, login_required
-
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = os.getenv("SECRET_KEY")
@@ -69,7 +66,8 @@ def about_page():
 def registration_post():
     email = request.form.get('email').strip()
     password = request.form.get('password').strip()
-    if email != "" and password != "" and database.create_user(email, email, password):
+    if email != "" and password != "" and database.create_user(email, email,
+                                                               password):
         remember = request.form.get('remember') is not None
         user_id = database.check_user(email, email, password)
         login_user(User(user_id, database), remember=remember)
@@ -107,4 +105,3 @@ def upload_model():
     model_description = request.form.get('modelDescription')
     logging.warning(model_name, model_description)
     return redirect("/")
-
