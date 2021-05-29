@@ -1,4 +1,5 @@
 import logging
+import os
 
 import requests
 import hashlib
@@ -10,6 +11,7 @@ from flask_login import UserMixin, LoginManager, login_user
 
 
 app = Flask(__name__)
+app.config['SECRET_KEY'] = os.urandom(16)
 db_connection_params = get_heroku_params()
 database = YourFactoryDB(**db_connection_params)
 database.connect()
@@ -21,14 +23,12 @@ login_manager.init_app(app)
 
 @login_manager.user_loader
 def load_user(user_id):
-    return User(user_id)
+    return User(user_id, database)
 
 
 @app.route('/')
 def main_page():
     model_ids = "None"
-
-    # Do something with the data
     return render_template('store_front.html', data=model_ids)
 
 
@@ -57,6 +57,9 @@ def registration_post():
     email = request.form.get('email')
     password = request.form.get('password')
     if database.create_user(email, email, password):
+        remember = request.form.get('remember')
+        user_id = database.check_user(email, email, password)
+        login_user(User(user_id, database), remember=remember)
         return redirect("/")
     return redirect("/login")
 
@@ -68,7 +71,7 @@ def sign_in_post():
     remember = request.form.get('remember')
     user_id = database.check_user(email, email, password)
     if user_id is not None:
-        login_user(User(id, email, email), remember=remember)
+        login_user(User(user_id, database), remember=remember)
         return redirect("/")
     return redirect("/login")
 

@@ -65,66 +65,10 @@ class YourFactoryDB:
                 return None
             password_hash = hashlib.sha256((password + salt).encode('utf-8')).hexdigest()
             curr.execute("SELECT * FROM check_user_authentication(%s, %s)", (login, password_hash))
-            user_id = bool(curr.fetchone()[0])
+            user_id = curr.fetchone()[0]
             return user_id
         except psycopg2.DatabaseError as error:
             logging.error(error)
         finally:
             curr.close()
         return None
-'''
-def get_models():
-    """
-    Return
-    :return: list of models present in the database
-    """
-    return "Bleep blop nothing here atm :("
-
-
-def get_model_data(mid):
-    """
-    Get model data:
-
-    - model description,
-    - model price,
-    - available materials
-    - model blob
-
-    :param mid: model id
-    :return: dict with model data
-    """
-    pass
-
-
-def create_model():
-    """
-    Add a new model.
-
-    Request body must contain:
-
-    - description,
-    - price,
-    - available materials,
-    - Optional[model blob]
-
-    :return: model id
-    """
-    pass
-
-
-def change_model(mid):
-    """
-    Update model params:
-
-    - description,
-    - price,
-    - available materials,
-    - model blob
-
-    Any unspecified parameter is left unchanged.
-
-    :param mid: model id to change
-    :return: status code
-    """
-    pass
-'''
