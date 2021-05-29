@@ -1,19 +1,4 @@
-$(document).ready(function() {
-
-  $('.color-choose input').on('click', function() {
-      var headphonesColor = $(this).attr('data-image');
-
-      $('.active').removeClass('active');
-      $('.left-column img[data-image = ' + headphonesColor + ']').addClass('active');
-      $(this).addClass('active');
-  });
-
-});
-
-amount = document.getElementById('AmountOfModelsToBuy');
-amount.addEventListener('change', multiplyAmountAndPrice);
-function multiplyAmountAndPrice() {
-    var price = document.getElementById('Price').value;
-    var amount = document.getElementById('AmountOfModelsToBuy').value;
-    document.getElementById('FinalPrice').value = price * amount;
+function changeImage(element) {
+    var main_prodcut_image = document.getElementById('main_product_image');
+    main_prodcut_image.src = element.src;
 }
