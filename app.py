@@ -17,7 +17,7 @@ database = YourFactoryDB(**db_connection_params)
 database.connect()
 
 login_manager = LoginManager()
-login_manager.login_view = u'Войдите в систему для доступа'
+login_manager.login_message = u'Войдите в систему для доступа'
 login_manager.login_view = 'login_page'
 login_manager.init_app(app)
 
