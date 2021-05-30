@@ -1,7 +1,7 @@
 import os
 import flask
 from db import YourFactoryDB, User
-from flask import Flask, render_template, redirect, request
+from flask import Flask, render_template, redirect, request, url_for
 from flask_login import (LoginManager, login_user, login_required, current_user,
                          logout_user)
 from utils import get_heroku_params
@@ -100,7 +100,7 @@ def sign_in_post():
 
     if user_id is not None:
         login_user(User(user_id, database), remember=remember)
-        return redirect("/")
+        return redirect(request.args.get("next") or url_for("/"))
 
     flask.flash('Не удалось выполнить вход. Проверьте введённые данные.')
     return redirect("/login")
