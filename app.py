@@ -56,17 +56,19 @@ def logout():
     return redirect('/')
 
 
-@app.route('/checkout')
+@app.route('/checkout/<model_id>')
 @login_required
-def checkout_page():
-    return render_template('checkout.html', user=check_if_logged_in())
+def checkout_page(model_id):
+    data = database.get_model(model_id)
+    return render_template('checkout.html', user=check_if_logged_in(),
+                           model_name=data[0], model_desc=data[1])
 
 
 @app.route('/model/<model_id>')
 def model_page(model_id):
     data = database.get_model(model_id)
     return render_template('model_page.html', data=data,
-                           user=check_if_logged_in())
+                           user=check_if_logged_in(), model_id=model_id)
 
 
 @app.route('/about')
@@ -100,7 +102,7 @@ def sign_in_post():
 
     if user_id is not None:
         login_user(User(user_id, database), remember=remember)
-        return redirect("/")
+        return redirect(request.args.get("next") or "/")
 
     flask.flash('Не удалось выполнить вход. Проверьте введённые данные.')
     return redirect("/login")
