@@ -65,6 +65,14 @@
 
 
 <main class="form-signin">
+    {% with messages = get_flashed_messages() %}
+        {% for message in messages %}
+            <div class="alert alert-danger" role="alert">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endwith %}
+
     <form>
         <h1 class="h3 mb-3 fw-normal">Вход в систему</h1>
 

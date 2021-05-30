@@ -1,13 +1,10 @@
 import os
-
 import flask
-
 from db import YourFactoryDB, User
 from flask import Flask, render_template, redirect, request
 from flask_login import (LoginManager, login_user, login_required, current_user,
                          logout_user)
 from utils import get_heroku_params
-from werkzeug.exceptions import RequestEntityTooLarge
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = os.getenv("SECRET_KEY")
@@ -20,6 +17,7 @@ database = YourFactoryDB(**db_connection_params)
 database.connect()
 
 login_manager = LoginManager()
+login_manager.login_view = u'Войдите в систему для доступа'
 login_manager.login_view = 'login_page'
 login_manager.init_app(app)
 
@@ -80,12 +78,16 @@ def about_page():
 def registration_post():
     email = request.form.get('email').strip()
     password = request.form.get('password').strip()
+
     if email != "" and password != "" and database.create_user(email, email,
                                                                password):
         remember = request.form.get('remember') is not None
         user_id = database.check_user(email, email, password)
         login_user(User(user_id, database), remember=remember)
         return redirect("/")
+
+    flask.flash('Не удалось создать учётную запись. '
+                'Возможно, Вы уже зарегистрированы?')
     return redirect("/login")
 
 
@@ -95,9 +97,12 @@ def sign_in_post():
     password = request.form.get('password')
     remember = request.form.get('remember') is not None
     user_id = database.check_user(email, email, password)
+
     if user_id is not None:
         login_user(User(user_id, database), remember=remember)
         return redirect("/")
+
+    flask.flash('Не удалось выполнить вход. Проверьте введённые данные.')
     return redirect("/login")
 
 

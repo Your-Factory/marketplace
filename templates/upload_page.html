@@ -59,7 +59,7 @@
     </nav>
 </header>
 <main>
-    <div class="container p-4" >
+    <div class="container p-4">
 
         <p></p>
         <div class="p-4 text-center">
@@ -67,14 +67,16 @@
         </div>
 
         {% with messages = get_flashed_messages() %}
-            {% if messages %}
-                {% for message in messages %}
-                    <h3>{{ message }}</h3>
-                {% endfor %}
-            {% endif %}
+            {% for message in messages %}
+                <div class="alert alert-danger" role="alert">
+                    {{ message }}
+                </div>
+            {% endfor %}
         {% endwith %}
+
         <h4>Информация о модели</h4>
-        <form class="requires-validation" action="/uploading" method="POST" enctype="multipart/form-data" name="fileForm" novalidate >
+        <form class="requires-validation" action="/uploading" method="POST" enctype="multipart/form-data"
+              name="fileForm" novalidate>
             <div class="col-md-5">
                 <label for="inputName">Пользователь</label>
                 <input class="form-control" type="text" placeholder="{{ user.email }}"
@@ -93,7 +95,8 @@
                 <label for="inputText" class="form-label">
                     Описание
                 </label>
-                <textarea class="form-control" id="descriptionInput" rows="3" name="modelDescription" required></textarea>
+                <textarea class="form-control" id="descriptionInput" rows="3" name="modelDescription"
+                          required></textarea>
                 <div class="invalid-feedback">
                     Заполните поле
                 </div>
@@ -104,7 +107,8 @@
                 <label for="formFileMultiple" class="form-label">
                     Файлы изображений модели
                 </label>
-                <input class="form-control" type="file" id="formFileImg" accept=".jpg,.png" name="modelImages"multiple required>
+                <input class="form-control" type="file" id="formFileImg" accept=".jpg,.png" name="modelImages" multiple
+                       required>
                 <div class="invalid-feedback">
                     Проверьте расширение файла
                 </div>
@@ -114,7 +118,7 @@
                 <label for="formFile" class="form-label">
                     Файл модели (максимум - 10 мегабайт)
                 </label>
-                <input class="form-control" type="file" id="formFileModel" accept=".obj" name="modelFile" required >
+                <input class="form-control" type="file" id="formFileModel" accept=".obj" name="modelFile" required>
                 <div class="invalid-feedback">
                     Проверьте расширение файла
                 </div>
