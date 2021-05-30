@@ -55,6 +55,7 @@ class YourFactoryDB:
         except psycopg2.DatabaseError as add_user_error:
             logging.warning(add_user_error)
             error = True
+            self.conn.rollback()
         finally:
             if curr is not None:
                 curr.close()
@@ -81,6 +82,7 @@ class YourFactoryDB:
             return user_id
         except psycopg2.DatabaseError as error:
             logging.error(error)
+            self.conn.rollback()
         finally:
             curr.close()
         return None
@@ -94,6 +96,7 @@ class YourFactoryDB:
             previews.extend(curr.fetchall())
         except psycopg2.DatabaseError as error:
             logging.error(error)
+            self.conn.rollback()
         finally:
             curr.close()
 
@@ -112,6 +115,7 @@ class YourFactoryDB:
             data = curr.fetchone()
         except psycopg2.DatabaseError as error:
             logging.error(error)
+            self.conn.rollback()
         finally:
             curr.close()
 
@@ -145,5 +149,6 @@ class YourFactoryDB:
             self.conn.commit()
         except psycopg2.DatabaseError as error:
             logging.error(error)
+            self.conn.rollback()
         finally:
             curr.close()
