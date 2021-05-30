@@ -9,13 +9,29 @@ services:
       dockerfile: Dockerfile
     environment:
       PORT: "${WEB_PORT}"
-      DATABASE_URL: "${DATABASE_URL}"
+
+      # You can use either DATABASE_URL or specify
+      # separate DB_HOST, DB_PORT, etc
+      # DATABASE_URL: "${DATABASE_URL}"
+      DB_HOST: "${DB_HOST}"
+      DB_PORT: "${DB_PORT}"
+      DB_NAME: "${DB_NAME}"
+      DB_USER: "${DB_USER}"
+      DB_PASSWORD: "${POSTGRES_PASSWORD}"
+
+      # Secret key used for authorization
       SECRET_KEY: "${SECRET_KEY}"
+
+      # Number of gunicorn worker processes
       WEB_CONCURRENCY: "${WEB_CONCURRENCY}"
     ports:
       - "${WEB_PORT}:${WEB_PORT}"
     networks:
       - internal
+
+    depends_on:
+      database:
+        condition: service_healthy
 
   database:
     image: postgres:13.2-alpine
@@ -26,9 +42,15 @@ services:
     volumes:
       - ./db:/docker-entrypoint-initdb.d/
 
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 10s
+      timeout: 5s
+      retries: 100
+
     # Uncomment to map ports allowing direct access to Database.
     # Convenient when debugging.
-    #    ports:
-    #      - "${DB_PORT}:${DB_PORT}"
+    ports:
+      - "${DB_PORT}:${DB_PORT}"
     networks:
       - internal
