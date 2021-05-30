@@ -1,6 +1,9 @@
-import * as THREE from "/static/js/three/three.module.js"
-import {OBJLoader} from "/static/js/three/OBJLoader.js";
-import {OrbitControls} from "/static/js/three/OrbitControls.js";
+import * as THREE
+    from 'https://cdn.skypack.dev/pin/three@v0.129.0-chk6X8RSBl37CcZQlxof/mode=imports,min/optimized/three.js';
+import {OBJLoader}
+    from 'https://cdn.skypack.dev/pin/three@v0.129.0-chk6X8RSBl37CcZQlxof/mode=imports,min/unoptimized/examples/jsm/loaders/OBJLoader.js';
+import {OrbitControls}
+    from 'https://cdn.skypack.dev/pin/three@v0.129.0-chk6X8RSBl37CcZQlxof/mode=imports,min/unoptimized/examples/jsm/controls/OrbitControls.js';
 
 let camera, scene, renderer, controls, object;
 

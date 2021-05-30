@@ -4,3 +4,8 @@
 **/*.sql
 **/heroku.yml
 **/README*
+**/LICENSE*
+heroku.yml
+.gitignore
+.git
+docker-compose.yml
