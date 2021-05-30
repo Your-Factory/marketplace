@@ -1,0 +1,198 @@
+<!doctype html>
+<html lang="ru">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+    <meta name="generator" content="Hugo 0.83.1">
+
+    <title>О нас</title>
+
+    <link rel="canonical" href="https://getbootstrap.com/docs/5.0/examples/jumbotron/">
+
+
+    {#    Bootstrap core CSS#}
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+
+    {#    Custom styles for this template#}
+    <link href="{{ url_for('static', filename='css/about.css') }}" rel="stylesheet">
+</head>
+<body>
+<header>
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top bg-dark">
+        <div class="container">
+            <a class="navbar-brand" href="/">YourFactory</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarSupportedContent"
+                    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/">Маркетплейс</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="/about">О нас</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="collapse navbar-collapse justify-content-center" id="navbarSupportedContent">
+                <form class="form-inline d-flex mx-lg-auto rounded p-1">
+                    <input class="form-control mr-sm-1" type="search" placeholder="Search"
+                           aria-label="Найдите нужную модель">
+                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Поиск</button>
+                </form>
+            </div>
+            <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Корзина</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/upload_model">Загрузить модель</a>
+                    </li>
+                    <li class="nav-item">
+                        {% if user is none %}
+                            <a class="nav-link" href="/login">Вход/Регистрация</a>
+                        {% else %}
+                            <a class="nav-link" href="/login">{{ user.email }} [Выйти]</a>
+                        {% endif %}
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+<main>
+    <div class="container py-4">
+        <p></p>
+        <div class=" p-5 mb-4 bg-light rounded-3">
+            <div class="container-fluid py-5">
+                <h1 class="display-5 fw-bold">YourFactory</h1>
+                <p class="col-md-8 fs-4">Наш проект: создание сайта для компании по печати 3D-моделей с удобным
+                    маркетплейсом.</p>
+            </div>
+        </div>
+
+
+        <div class="row align-items-md-stretch">
+
+            <p></p>
+            <div class="col-md-6">
+                <div class="h-100 p-5 text-white bg-dark rounded-3">
+                    <h2>Полезная информация</h2>
+                    <h2><br></h2>
+                    <a class="btn btn-primary btn-lg" href="https://trello.com/b/kxNVYRwQ/marketplace" role="button">Трелло</a>
+                    <a class="btn btn-primary btn-lg " href="https://github.com/Your-Factory" role="button">GitHub</a>
+                    {#                    <a class="btn btn-primary btn-lg"#}
+                    {#                       href="https://drive.google.com/drive/folders/1gDOo4pxtz4r5ip-yTK4gfnmPBIms7IIE?usp=sharing"#}
+                    {#                       role="button">Гугл диск</a>#}
+                    <a class="btn btn-primary btn-lg" href="https://miro.com/app/board/o9J_lEwWcoE=/"
+                       role="button">Miro</a>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="h-100 p-5 bg-light border rounded-3">
+                    <h2>Служба поддержки</h2>
+                    <p> Ермолина Вика (Project manager) - т. 8-ххх-ххх-хх-хх <br>
+                        Третьяков Вячеслав (Product manager) - т. 8-ххх-ххх-хх-хх
+                        <br>
+                        <a href="mailto:tregubova.irina@hotmail.com">Задавайте вопросы по электронной почте </a>
+                        <br>
+                        Ps. По вопросам фронта НЕ ПИСАТЬ
+                    </p>
+
+                </div>
+            </div>
+        </div>
+        <p></p>
+
+        <!-- Team section -->
+        <div class="team">
+            <div class="container">
+                <h1 class="text-center">Our Team</h1>
+                <div class="row">
+                    <div class="col-lg-4 col-md-4 col-sm-12 item">
+                        <img align="center" src="{{ url_for('static', filename='img/vika.png') }}" class="img-circle"
+                             alt="team">
+                        <div class="des">
+                            Ермолина Вика
+                        </div>
+                        <span class="text-muted text-center">Project Manager</span>
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-sm-12 item">
+                        <img align="center" src="{{ url_for('static', filename='img/slava.jpg') }}" class="img-circle"
+                             alt="team">
+                        <div class="des">
+                            Третьяков Вячеслав
+                        </div>
+                        <span class="text-muted text-center">Product Manager and Tester</span>
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-sm-12 item">
+                        <img align="center" src="{{ url_for('static', filename='img/Misha.png') }}" class="img-circle"
+                             alt="team">
+                        <div class="des">
+                            Еленский Михаил
+                        </div>
+                        <span class="text-muted">Architect and Developer</span>
+                    </div>
+
+                </div>
+                <h1></h1>
+                <div class="row">
+                    <div class="col-lg-4 col-md-4 col-sm-12 item">
+                        <img align="center" src="{{ url_for('static', filename='img/Ira.jpg') }}" class="img-circle"
+                             alt="team">
+                        <div class="des">
+                            Трегубова Ирина
+                        </div>
+                        <span class="text-muted">Frontend Developer</span>
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-sm-12 item">
+                        <img align="center" src="{{ url_for('static', filename='img/Danil.jpg') }}" class="img-circle"
+                             alt="team">
+                        <div class="des">
+                            Лапков Данил
+                        </div>
+                        <span class="text-muted">Frontend Developer</span>
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-sm-12 item">
+                        <img align="center" src="{{ url_for('static', filename='img/Garnic.jpg') }}" class="img-circle"
+                             alt="team">
+                        <div class="des">
+                            Варельджан Гарник
+                        </div>
+                        <span class="text-muted">Backend Developer</span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <h1></h1>
+        <h1>Наш Timeline!</h1>
+        <iframe width="100%" height="400" src="https://time.graphics/embed?v=1&id=511652" frameborder="0"
+                allowfullscreen></iframe>
+        <div>
+            <a style="font-size: 12px; text-decoration: none;" title="Business graphics"
+               href="https://time.graphics">
+            </a>
+        </div>
+
+        <footer class="pt-3 mt-4 text-muted border-top">
+            &copy; 2021 YourFactory
+        </footer>
+    </div>
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4"
+        crossorigin="anonymous">
+</script>
+
+</body>
+</html>

@@ -1,0 +1,33 @@
+version: "3"
+networks:
+  internal:
+
+services:
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      PORT: "${WEB_PORT}"
+      DATABASE_URL: "${DATABASE_URL}"
+      SECRET_KEY: "${SECRET_KEY}"
+    ports:
+      - "${WEB_PORT}:${WEB_PORT}"
+    networks:
+      - internal
+
+  database:
+    image: postgres:13.2-alpine
+    # map directories
+    # Every .sql or .sh script in the mapped directory is executed on container startup
+    environment:
+      POSTGRES_PASSWORD: "${POSTGRES_PASSWORD}"
+    volumes:
+      - ./db:/docker-entrypoint-initdb.d/
+
+    # Uncomment to map ports allowing direct access to Database.
+    # Convenient when debugging.
+    #    ports:
+    #      - "${DB_PORT}:${DB_PORT}"
+    networks:
+      - internal

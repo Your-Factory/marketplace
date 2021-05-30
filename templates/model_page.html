@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="ru" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+    <meta name="generator" content="Hugo 0.83.1">
+    <title>Маркетплейс</title>
+
+    <link rel="canonical" href="https://getbootstrap.com/docs/5.0/examples/album/">
+
+
+    {# Bootstrap core CSS #}
+    {# <link href="{{ url_for('static', filename='css/bootstrap.min.css') }}" rel="stylesheet">#}
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+
+    {# Custom styles for this template#}
+    <link href="{{ url_for('static', filename='css/model.css') }}" rel="stylesheet">
+
+</head>
+<body>
+<header>
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top bg-dark">
+        <div class="container">
+            <a class="navbar-brand" href="/">YourFactory</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarSupportedContent"
+                    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/">Маркетплейс</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/about">О нас</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="collapse navbar-collapse justify-content-center" id="navbarSupportedContent">
+                <form class="form-inline d-flex mx-lg-auto rounded p-1">
+                    <input class="form-control mr-sm-1" type="search" placeholder="Search"
+                           aria-label="Найдите нужную модель">
+                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Поиск</button>
+                </form>
+            </div>
+            <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Корзина</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/upload_model">Загрузить модель</a>
+                    </li>
+                    <li class="nav-item">
+                        {% if user is none %}
+                            <a class="nav-link" href="/login">Вход/Регистрация</a>
+                        {% else %}
+                            <a class="nav-link" href="/login">{{ user.email }} [Выйти]</a>
+                        {% endif %}
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+
+<main>
+    <section class="py-5 text-center container">
+        <div class="row py-lg-5">
+            <div class="col-lg-6 col-md-8 mx-auto">
+                <!--  <p></p>
+                  <h1 class="fw-light">YourFactory marketplace</h1>
+                  <p class="lead text-muted">Описание по поводу моделей</p>-->
+                <!--<p>
+                    <a href="#" class="btn btn-primary my-2">Возможная кнопка</a>
+                    <a href="#" class="btn btn-secondary my-2">Возможная кнопка</a>
+                </p>-->
+            </div>
+        </div>
+    </section>
+    <section class="container mt-5 mb-5">
+        <div class="card">
+            <div class="row g-0">
+                <div class="col-md-6 border-end">
+                    <div class="d-flex flex-column justify-content-center">
+                        <div class="main_image" id="main_image"><img
+                                src="data:image/{{ data[4][0][1][1:] }};base64,{{ data[4][0][0] }}"
+                                id="main_product_image" width="500" alt=""></div>
+                        <div class="thumbnail_images">
+                            <ul id="thumbnail">
+                                {% for img, fmt in data[4] %}
+                                    <li>
+                                        <img onclick="changeImage(this)"
+                                             src="data:image/{{ fmt[1:] }};base64,{{ img }}"
+                                             width="70">
+                                    </li>
+                                {% endfor %}
+                                <li class="3d_preview">
+                                    <img onclick='changeToScene(model_data)'
+                                         src="{{ url_for('static', filename='img/cube_3d.png') }}"
+                                         width="70" alt="">
+                                </li>
+                                {#                                <li><img onclick="changeImage(this)"#}
+                                {#                                         src="https://img-new.cgtrader.com/items/1004958/b45e10d10c/blender-monkey-suzanne-3d-model-obj-fbx-blend.jpg"#}
+                                {#                                         width="70" alt=""></li>#}
+                                {#                                <li><img onclick="changeImage(this)"#}
+                                {#                                         src="https://img2.cgtrader.com/items/1004958/703a4660df/blender-monkey-suzanne-3d-model-obj-fbx-blend.jpg"#}
+                                {#                                         width="70" alt=""></li>#}
+                                {#                                <li><img onclick="changeImage(this)"#}
+                                {#                                         src="https://img1.cgtrader.com/items/1004958/faeb361228/blender-monkey-suzanne-3d-model-obj-fbx-blend.jpg"#}
+                                {#                                         width="70" alt=""></li>#}
+                                {# <li><img onclick="changeImage(this)"#}
+                                {# src="{{ url_for('static', filename='img/cube_3d.png') }}"#}
+                                {# width="70" alt=""></li>#}
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="p-3 right-side">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <h3>{{ data[0] }}</h3>
+                        </div>
+                        <div class="mt-2 pr-3 content">
+                            <p>{{ data[1] }}</p>
+                        </div>
+                        <div class="m-bot15"><strong>Price : </strong> <span class="amount-old">$544</span></div>
+                        <div class="ratings d-flex flex-row align-items-center">
+                            <div class="d-flex flex-row"><i class='bx bxs-star'></i> <i class='bx bxs-star'></i> <i
+                                    class='bx bxs-star'></i> <i class='bx bxs-star'></i> <i class='bx bx-star'></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="buttons d-flex flex-row mt-5 gap-3 justify-content-center">
+                        <form method="get" action="/checkout">
+                            <button type="submit" class="btn btn-dark">Купить сейчас
+                            </button>
+                        </form>
+                        {# <form method="get" action="/model3d"> #}
+                        {# <button type="submit" class="btn btn-outline-dark">Посмотреть #}
+                        {# </button> #}
+                        {# </form> #}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+
+<footer class="text-muted py-5">
+    <div class="container">
+        <p class="mb-1"> &copy;2021 YourFactory</p>
+    </div>
+</footer>
+
+<script type="module" src="{{ url_for('static', filename='js/preview.js') }}"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4"
+        crossorigin="anonymous">
+</script>
+{#<script src="{{ url_for('static', filename='js/bootstrap.bundle.min.js') }}"></script>#}
+<script src="{{ url_for('static', filename='js/model.js') }}"></script>
+<script type="text/javascript">
+    let model_data = {{ data[2] | tojson }};
+</script>
+
+</body>
+</html>

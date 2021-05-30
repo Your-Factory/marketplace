@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset=UTF-8/>
+    <link href="{{ url_for('static', filename='css/model3d.css') }}" rel="stylesheet">
+    <title>Интерактивный просмотр модели</title>
+</head>
+<body>
+<div id="info">
+    <a href="https://threejs.org" target="_blank" rel="noopener">three.js</a> - OBJLoader test
+</div>
+
+<script type="module">
+    import * as THREE from "{{ url_for('static', filename='js/three/three.module.js') }}"
+
+    import {DDSLoader} from "{{  url_for('static', filename='js/three/DDSLoader.js') }}";
+    import {MTLLoader} from "{{ url_for('static', filename='js/three/MTLLoader.js') }}";
+    import {OBJLoader} from "{{ url_for('static', filename='js/three/OBJLoader.js') }}";
+    import {OrbitControls} from "{{ url_for('static', filename='js/three/OrbitControls.js') }}";
+
+    let camera, scene, renderer, controls;
+    let mouseX = 0, mouseY = 0;
+
+    init();
+    animate();
+
+    function init() {
+        const container = document.createElement('div');
+        document.body.appendChild(container);
+
+        camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 1, 2000);
+        camera.position.z = 20;
+
+        scene = new THREE.Scene();
+
+        const ambientLight = new THREE.AmbientLight(0xcccccc, 0.4);
+        scene.add(ambientLight);
+
+        const directionalLight = new THREE.DirectionalLight(0xffffff, 0.8);
+        camera.add(directionalLight);
+        scene.add(camera);
+
+        const manager = new THREE.LoadingManager();
+        manager.addHandler(/\.dds$/i, new DDSLoader());
+
+        new MTLLoader(manager)
+            .setPath("{{ url_for('static', filename='models') }}")
+            .load('/suzanne.mtl', function (materials) {
+                materials.preload();
+
+                new OBJLoader(manager)
+                    .setMaterials(materials)
+                    .setPath("{{ url_for('static', filename='models') }}")
+                    .load('/suzanne.obj', function (object) {
+                        object.position.y = 0;
+                        scene.add(object);
+                    });
+            });
+
+        renderer = new THREE.WebGLRenderer();
+        renderer.setPixelRatio(window.devicePixelRatio);
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        container.appendChild(renderer.domElement);
+
+        controls = new OrbitControls(camera, renderer.domElement);
+        controls.listenToKeyEvents(window);
+
+        window.addEventListener('resize', onWindowResize);
+    }
+
+    function onWindowResize() {
+        camera.aspect = window.innerWidth / window.innerHeight;
+        camera.updateProjectionMatrix();
+
+        renderer.setSize(window.innerWidth, window.innerHeight);
+    }
+
+    function animate() {
+        requestAnimationFrame(animate);
+        controls.update();
+        render();
+    }
+
+    function render() {
+        camera.lookAt(scene.position);
+        renderer.render(scene, camera);
+    }
+
+</script>
+</body>
+</html>
