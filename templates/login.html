@@ -94,7 +94,7 @@
         </div>
 
         <button class="w-100 btn btn-lg btn-primary" type="submit" id="loginButton" formmethod="post"
-                formaction="/signin">
+                formaction="{{ url_for('sign_in_post', next=request.args.get('next')) }}">
             Войти
         </button>
 
