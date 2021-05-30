@@ -66,6 +66,13 @@
             <h2 class="py-5">Загрузка модели</h2>
         </div>
 
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                {% for message in messages %}
+                    <h3>{{ message }}</h3>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
         <h4>Информация о модели</h4>
         <form class="requires-validation" action="/uploading" method="POST" enctype="multipart/form-data" name="fileForm" novalidate >
             <div class="col-md-5">
@@ -105,7 +112,7 @@
             <p></p>
             <div class="col-md-6">
                 <label for="formFile" class="form-label">
-                    Файл модели
+                    Файл модели (максимум - 10 мегабайт)
                 </label>
                 <input class="form-control" type="file" id="formFileModel" accept=".obj" name="modelFile" required >
                 <div class="invalid-feedback">

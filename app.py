@@ -1,14 +1,19 @@
 import os
+
+import flask
+
 from db import YourFactoryDB, User
 from flask import Flask, render_template, redirect, request
 from flask_login import (LoginManager, login_user, login_required, current_user,
                          logout_user)
 from utils import get_heroku_params
+from werkzeug.exceptions import RequestEntityTooLarge
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = os.getenv("SECRET_KEY")
 app.config.update(
-    SESSION_COOKIE_SAMESITE='Lax'
+    SESSION_COOKIE_SAMESITE='Lax',
+    MAX_CONTENT_LENGTH=10 * 1000 * 1000  # 10 MB
 )
 db_connection_params = get_heroku_params()
 database = YourFactoryDB(**db_connection_params)
@@ -128,6 +133,12 @@ def upload_image():
             database.add_model(name, description, model_file, author_id,
                                model_format, images_bytes, images_formats)
     return redirect("/")
+
+
+@app.errorhandler(413)
+def entity_too_large(_):
+    flask.flash('Слишком большой файл!')
+    return redirect('/upload_model')
 
 
 def check_if_logged_in():
