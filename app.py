@@ -101,11 +101,6 @@ def sign_in_post():
     return redirect("/login")
 
 
-# @app.route('/model3d')
-# def model3d_page():
-#     return render_template('model3d_page.html')
-
-
 @app.route('/upload_model')
 @login_required
 def upload_page():
