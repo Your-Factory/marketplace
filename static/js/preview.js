@@ -14,8 +14,9 @@ function changeToScene(model_json) {
     }
 
     let model = JSON.parse(model_json);
-
     let container = document.createElement('div');
+    let parent = container;
+
     container.setAttribute('class', 'main_product_image');
     main_image.appendChild(container);
 
@@ -37,10 +38,6 @@ function init(container, model_bytes) {
     scene.add(camera);
 
     function loadModel() {
-        object.traverse(function (child) {
-            if (child.isMesh) child.material.map = texture;
-        });
-
         object.position.y = 0;
         scene.add(object);
     }
@@ -57,7 +54,17 @@ function init(container, model_bytes) {
     container.appendChild(renderer.domElement);
 
     controls = new OrbitControls(camera, renderer.domElement);
+    controls.panSpeed = 0.6;
+    controls.zoomSpeed = 1.0;
+    controls.rotateSpeed = 1.0;
+
     controls.listenToKeyEvents(window);
+    controls.addEventListener('change', render);
+    controls.screenSpacePanning = true;
+
+    controls.minDistance = 10;
+    controls.maxDistance = 500;
+    controls.update();
 
     window.addEventListener('resize', onWindowResize);
 }
@@ -65,7 +72,6 @@ function init(container, model_bytes) {
 function onWindowResize() {
     camera.aspect = window.innerWidth / window.innerHeight;
     camera.updateProjectionMatrix();
-
     renderer.setSize(window.innerWidth, window.innerHeight);
 }
 
@@ -76,7 +82,6 @@ function animate() {
 }
 
 function render() {
-    camera.lookAt(scene.position);
     renderer.render(scene, camera);
 }
 
