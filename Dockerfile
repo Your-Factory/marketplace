@@ -8,5 +8,5 @@ RUN \
     pip install --no-cache-dir -r requirements.txt && \
     apk --purge del .build-deps
 ENV PATH /venv/bin:$PATH
-CMD gunicorn -b 0.0.0.0:${PORT} app:app
+CMD gunicorn -b 0.0.0.0:${PORT} -t ${TIMEOUT} app:app
 COPY ./ /app/

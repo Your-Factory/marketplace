@@ -24,6 +24,9 @@ services:
 
       # Number of gunicorn worker processes
       WEB_CONCURRENCY: "${WEB_CONCURRENCY}"
+
+      # gunicorn worker timeout
+      TIMEOUT: "${TIMEOUT}"
     ports:
       - "${WEB_PORT}:${WEB_PORT}"
     networks:
